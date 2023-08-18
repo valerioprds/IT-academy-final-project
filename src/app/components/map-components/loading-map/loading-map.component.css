@@ -1,0 +1,9 @@
+.map-loading {
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  position: fixed;
+  right: 0px;
+  top: 80px;
+  width: 100vw;
+  height: 100vh;
+}

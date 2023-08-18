@@ -1,0 +1,3 @@
+interface UserData {
+  email: string;
+}
