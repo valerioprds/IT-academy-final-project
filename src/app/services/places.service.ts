@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { ToiletLocation } from '../utils/toiletLocation.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PlacesService {
   location?: [number, number];
+  //toiletLocations ?: [number, number];
 
   get locationReady(): boolean {
     return !!this.location; // con doble !! es un dato true
@@ -27,4 +27,7 @@ export class PlacesService {
       );
     });
   }
+
+
+
 }

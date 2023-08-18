@@ -18,7 +18,7 @@ export class MapService {
   flyTo(coords: LngLatLike) {
     if (!this.mapReady) throw Error('Map is not initiated');
     this.map?.flyTo({
-      zoom: 14,
+      zoom: 16,
       center: coords,
     });
   }

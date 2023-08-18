@@ -10,7 +10,4 @@ export class AppComponent {
   title = 'Final Project';
 
   constructor(private placesSvc: PlacesService) {}
-
-
-
 }
