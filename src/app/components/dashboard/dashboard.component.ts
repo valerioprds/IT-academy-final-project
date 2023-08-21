@@ -16,9 +16,9 @@ export class DashboardComponent implements OnInit {
     private router: Router
   ) {}
 
-  get locationReady() {
+/*   get locationReady() {
     return this.placesSvc.locationReady;
-  }
+  } */
 
   ngOnInit(): void {
      /* this.afAuth.currentUser.then((user) => {
