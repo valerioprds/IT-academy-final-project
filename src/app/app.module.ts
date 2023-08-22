@@ -7,6 +7,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire/compat'; // Importa AngularFireModule
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 //components
@@ -18,6 +20,7 @@ import { EmailVerificationComponent } from './components/email-verification/emai
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'environments/environment';
+import { AddLocationComponent } from './components/add-location/add-location.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { environment } from 'environments/environment';
     EmailVerificationComponent,
     RecoverPasswordComponent,
     SpinnerComponent,
+    AddLocationComponent,
 
 
 
@@ -40,6 +44,7 @@ import { environment } from 'environments/environment';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

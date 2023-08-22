@@ -1,0 +1,16 @@
+<form
+  [formGroup]="ToiletlocationForm"
+  (ngSubmit)="submitForm()"
+  class="mb-4"
+>
+  <div class="form-group">
+    <label for="toilet-id">Toilet ID</label>
+    <input type="text" id="toilet-id" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label for="toilet-address">Toilet address</label>
+    <input type="text" id="toilet-address" class="form-control" />
+  </div>
+  <button type="submit" [disabled]="ToiletlocationForm.invalid">Submit</button>
+  <!-- <a href="index.html" class="btn btn-secondary">Back</a> -->
+</form>
