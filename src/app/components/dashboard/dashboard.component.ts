@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
-import { LocationService } from 'src/app/services/location.service';
-import { PlacesService } from 'src/app/services/places.service';
-import mapboxgl from 'mapbox-gl';
+import * as mapboxgl from 'mapbox-gl';
+import { MapService } from 'src/app/services/map.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +11,7 @@ import mapboxgl from 'mapbox-gl';
 })
 export class DashboardComponent implements OnInit {
   dataUser: any = {};
+  coordinates: any = {}; // Initialize as an empty object
 
   toiletLocations: any = [];
 
@@ -22,15 +22,13 @@ export class DashboardComponent implements OnInit {
   lng = 2.1699341966931276;
 
   constructor(
-    private placesSvc: PlacesService,
+    //private placesSvc: PlacesService,
     private afAuth: AngularFireAuth,
     private router: Router,
-    private locationSvc: LocationService
+    private mapService: MapService
   ) {}
 
-  /*   get locationReady() {
-    return this.placesSvc.locationReady;
-  } */
+
 
   ngOnInit(): void {
     /* this.afAuth.currentUser.then((user) => {
@@ -42,11 +40,55 @@ export class DashboardComponent implements OnInit {
       }
     }); */
 
-    this.setToiletsOnMap();
+    // this.setToiletsOnMap();
 
+
+    this.initializeMap();
+    this.getToilets();
   }
 
-  createMap() {
+
+  initializeMap() {
+    this.map = new mapboxgl.Map({
+      container: "map",
+      style: this.mapService.getMapStyle(),
+      zoom: 14.5,
+      center: [2.1699341966931276, 41.38730104377958], // plaza cataluña
+    });
+  }
+
+
+  async getToilets() {
+    const toilets = await this.mapService.getToilets();
+    this.loadMap(toilets);
+  }
+
+
+  loadMap(toilets: any) {
+    this.map.on('load', () => {
+      this.map.addLayer({
+        id: 'points',
+        type: 'symbol',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: toilets
+          }
+        },
+        layout: {
+          "icon-image": "{icon}-15",
+          "icon-size": 2,
+          "text-field": "{toiletId}",
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-offset": [0, 0.9],
+          "text-anchor": "top"
+        }
+      });
+    });
+  }
+
+  /*  createMap() {
     mapboxgl as typeof mapboxgl;
     this.map = new mapboxgl.Map({
       accessToken:
@@ -54,21 +96,26 @@ export class DashboardComponent implements OnInit {
       container: 'map',
       style: this.style,
       zoom: 2,
-      center: [this.lng, this.lat]
+      center: [this.lng, this.lat],
     });
     // Add map controls
     this.map.addControl(new mapboxgl.NavigationControl());
-   // this.map.addSource('points',this.toiletLocations)
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        trackUserLocation: true,
+      })
+    );
+  } */
 
-    //buscar en la documentacion como añadir
-  }
-
-  setToiletsOnMap() {
+  /*  setToiletsOnMap() {
     this.locationSvc.getToiletsLocation().subscribe((res) => {
       this.toiletLocations = res.data;
       this.createMap();
     });
-  }
+  } */
 
   LogOut() {
     this.afAuth.signOut().then(() => {
@@ -76,7 +123,5 @@ export class DashboardComponent implements OnInit {
     });
   }
 }
-
-
 
 // buscar como agregar data al mapbox
