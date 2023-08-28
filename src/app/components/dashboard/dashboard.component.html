@@ -42,7 +42,9 @@
     <h1 class="display-4 text-center">
       <i class="fas fa-map-marked mr-4"></i> Toilet Locator
     </h1>
-    <a routerLink="/add" class="btn btn-success mb-4">Add Toilet</a>
+
+    <button [routerLink]="['/add-location']" class="btn btn-success mb-4">Add Toilet</button>
+
     <div id="map" style="width: 100%; height: 500px; border-radius: 5px"></div>
   </div>
 

@@ -5,6 +5,7 @@ import { UserRegistrationComponent } from './components/user-registration/user-r
 import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { AddLocationComponent } from './components/add-location/add-location.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -13,7 +14,9 @@ const routes: Routes = [
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'recover-password', component: RecoverPasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'add-location', component: AddLocationComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
+
 ];
 
 @NgModule({
