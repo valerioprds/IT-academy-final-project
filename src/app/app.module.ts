@@ -43,7 +43,7 @@ import { AddLocationComponent } from './components/add-location/add-location.com
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot(), // ToastrModule added
+    ToastrModule.forRoot( {positionClass: 'toast-top-full-width'}), // ToastrModule added
     HttpClientModule
   ],
   providers: [],

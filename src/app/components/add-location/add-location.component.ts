@@ -16,8 +16,7 @@ export class AddLocationComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private toastr: ToastrService,
-
+    private toastr: ToastrService
   ) {}
 
   ngOnInit() {
@@ -33,18 +32,18 @@ export class AddLocationComponent implements OnInit {
     if (this.toiletForm.valid) {
       try {
         const response = await this.http
-          .post('http://localhost:5000/api/v1/toilets', this.toiletForm.value , {
+          .post('http://localhost:5000/api/v1/toilets', this.toiletForm.value, {
             headers: header,
           })
           .toPromise();
 
         if (response) {
-          alert('toilet added succesfully');
-          this.router.navigate(['/']);// tengo que aladir ruta para el dashboard
+          this.toastr.success('toilet added succesfully');
+          this.router.navigate(['/dashboard']);
         }
       } catch (error: any) {
         if (error.status === 400) {
-          this.toastr.error('toilet already exist');
+          this.toastr.error('toilet already exists');
         } else {
           alert(error.message);
         }

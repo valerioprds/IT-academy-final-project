@@ -1,12 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import 'ngx-toastr/toastr';
+
 html,
 body {
-
   height: 100%;
 }
-
-
-
 
 .wrapper {
   display: flex;
@@ -27,7 +26,6 @@ body {
   margin: auto;
   /*  padding: 15px; */
   text-align: center;
-
 }
 
 .form-floating {
@@ -36,8 +34,6 @@ body {
 .error-label {
   margin-left: 5px;
 }
-
-
 
 .eyeicon {
   position: absolute;
