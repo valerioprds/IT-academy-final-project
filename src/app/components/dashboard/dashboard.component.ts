@@ -22,7 +22,6 @@ export class DashboardComponent implements OnInit {
   lng = 2.1699341966931276;
 
   constructor(
-    //private placesSvc: PlacesService,
     private afAuth: AngularFireAuth,
     private router: Router,
     private mapService: MapService
@@ -40,7 +39,6 @@ export class DashboardComponent implements OnInit {
       }
     }); */
 
-    // this.setToiletsOnMap();
 
 
     this.initializeMap();
@@ -88,34 +86,9 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  /*  createMap() {
-    mapboxgl as typeof mapboxgl;
-    this.map = new mapboxgl.Map({
-      accessToken:
-        'pk.eyJ1IjoiZHBpZXRyb2NhcmxvIiwiYSI6ImNram9tOGFuMTBvb3oyeXFsdW5uYmJjNGQifQ._zE6Mub0-Vpl7ggMj8xSUQ',
-      container: 'map',
-      style: this.style,
-      zoom: 2,
-      center: [this.lng, this.lat],
-    });
-    // Add map controls
-    this.map.addControl(new mapboxgl.NavigationControl());
-    this.map.addControl(
-      new mapboxgl.GeolocateControl({
-        positionOptions: {
-          enableHighAccuracy: true,
-        },
-        trackUserLocation: true,
-      })
-    );
-  } */
 
-  /*  setToiletsOnMap() {
-    this.locationSvc.getToiletsLocation().subscribe((res) => {
-      this.toiletLocations = res.data;
-      this.createMap();
-    });
-  } */
+
+
 
   LogOut() {
     this.afAuth.signOut().then(() => {
@@ -124,4 +97,3 @@ export class DashboardComponent implements OnInit {
   }
 }
 
-// buscar como agregar data al mapbox
