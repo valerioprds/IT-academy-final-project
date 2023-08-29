@@ -12,7 +12,6 @@
       placeholder="Example: close plaza universidad or close to El Corte Inglés "
     />
 
-
     <span
       *ngIf="
         toiletForm.get('toiletId')?.hasError('required') &&
@@ -20,7 +19,7 @@
       "
       class="text-danger error-label"
     >
-    Point of Interest is <strong>required</strong></span
+      Point of Interest is <strong>required</strong></span
     >
 
     <span
@@ -30,7 +29,8 @@
       "
       class="text-danger error-label"
     >
-    Point of Interest must have a minimum of <strong>6 characters</strong></span
+      Point of Interest must have a minimum of
+      <strong>6 characters</strong></span
     >
   </div>
   <div class="form-group">
@@ -73,3 +73,5 @@
     <a [routerLink]="['/dashboard']" class="btn btn-secondary ms-2">Back</a>
   </div>
 </form>
+
+
