@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   map!: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
 
-  // coordenadas plaza españa 
+  // coordenadas plaza españa
   lng = 2.1492734541257676;
   lat = 41.37519894542312
 
@@ -39,6 +39,7 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     }); */
+   //this.map.addControl(new mapboxgl.NavigationControl());
 
 
 
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
       zoom: 14.5,
       center: [this.lng, this.lat],
     });
+    this.map.addControl(new mapboxgl.NavigationControl());
   }
 
 
@@ -85,6 +87,8 @@ export class DashboardComponent implements OnInit {
         }
       });
     });
+
+
   }
 
 
