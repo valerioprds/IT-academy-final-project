@@ -10,6 +10,32 @@
       class="form-control"
       formControlName="toiletId"
     />
+    <span
+      *ngIf="toiletForm.get('toiletId')?.hasError('maxLength')"
+      class="text-danger"
+    >
+      Toilet ID cannot be longer than 10 characters.
+    </span>
+
+    <span
+      *ngIf="
+        toiletForm.get('toiletId')?.hasError('required') &&
+        toiletForm.get('toiletId')?.touched
+      "
+      class="text-danger error-label"
+    >
+      Toilet ID is <strong>required</strong></span
+    >
+
+    <span
+      *ngIf="
+        toiletForm.get('toiletId')?.hasError('maxlength') &&
+        toiletForm.get('toiletId')?.touched
+      "
+      class="text-danger error-label"
+    >
+      toiletID must have a max <strong>20 digits</strong></span
+    >
   </div>
   <div class="form-group">
     <label for="address">Toilet address</label>
@@ -19,7 +45,26 @@
       class="form-control"
       formControlName="address"
     />
+    <span
+      *ngIf="
+        toiletForm.get('address')?.hasError('required') &&
+        toiletForm.get('address')?.touched
+      "
+      class="text-danger error-label"
+    >
+      Address is <strong>required</strong></span
+    >
   </div>
+
+  <span
+    *ngIf="
+      toiletForm.get('address')?.hasError('minlength') &&
+      toiletForm.get('address')?.touched
+    "
+    class="text-danger error-label"
+  >
+    Address must have a least <strong>6 digits</strong></span
+  >
   <div class="mt-3">
     <button
       type="submit"

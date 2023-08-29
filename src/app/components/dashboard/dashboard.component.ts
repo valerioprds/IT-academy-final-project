@@ -18,8 +18,9 @@ export class DashboardComponent implements OnInit {
   map!: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
 
-  lat = 41.38730104377958;
-  lng = 2.1699341966931276;
+  // coordenadas plaza españa 
+  lng = 2.1492734541257676;
+  lat = 41.37519894542312
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -51,7 +52,7 @@ export class DashboardComponent implements OnInit {
       container: "map",
       style: this.mapService.getMapStyle(),
       zoom: 14.5,
-      center: [2.1699341966931276, 41.38730104377958], // plaza cataluña
+      center: [this.lng, this.lat],
     });
   }
 
