@@ -20,15 +20,13 @@ export class DashboardComponent implements OnInit {
 
   // coordenadas plaza españa
   lng = 2.1492734541257676;
-  lat = 41.37519894542312
+  lat = 41.37519894542312;
 
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
     private mapService: MapService
   ) {}
-
-
 
   ngOnInit(): void {
     /* this.afAuth.currentUser.then((user) => {
@@ -39,31 +37,38 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     }); */
-   //this.map.addControl(new mapboxgl.NavigationControl());
-
-
+    //this.map.addControl(new mapboxgl.NavigationControl());
 
     this.initializeMap();
     this.getToilets();
   }
 
-
   initializeMap() {
     this.map = new mapboxgl.Map({
-      container: "map",
+      container: 'map',
       style: this.mapService.getMapStyle(),
       zoom: 14.5,
       center: [this.lng, this.lat],
     });
     this.map.addControl(new mapboxgl.NavigationControl());
-  }
 
+    this.map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: {
+          enableHighAccuracy: true,
+        },
+        // When active the map will receive updates to the device's location as it changes.
+        trackUserLocation: true,
+        // Draw an arrow next to the location dot to indicate which direction the device is heading.
+        showUserHeading: true,
+      })
+    );
+  }
 
   async getToilets() {
     const toilets = await this.mapService.getToilets();
     this.loadMap(toilets);
   }
-
 
   loadMap(toilets: any) {
     this.map.on('load', () => {
@@ -74,26 +79,20 @@ export class DashboardComponent implements OnInit {
           type: 'geojson',
           data: {
             type: 'FeatureCollection',
-            features: toilets
-          }
+            features: toilets,
+          },
         },
         layout: {
-          "icon-image": "{icon}-15",
-          "icon-size": 2,
-          "text-field": "{toiletId}",
-          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-          "text-offset": [0, 0.9],
-          "text-anchor": "top"
-        }
+          'icon-image': '{icon}-15',
+          'icon-size': 2,
+          'text-field': '{toiletId}',
+          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+          'text-offset': [0, 0.9],
+          'text-anchor': 'top',
+        },
       });
     });
-
-
   }
-
-
-
-
 
   LogOut() {
     this.afAuth.signOut().then(() => {
@@ -101,4 +100,3 @@ export class DashboardComponent implements OnInit {
     });
   }
 }
-
