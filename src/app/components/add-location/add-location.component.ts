@@ -21,7 +21,7 @@ export class AddLocationComponent implements OnInit {
 
   ngOnInit() {
     this.toiletForm = this.fb.group({
-      toiletId: ['', [Validators.required, Validators.maxLength(20)]],
+      toiletId: ['', [Validators.required, Validators.minLength(6)]],
       address: ['', [Validators.required, Validators.minLength(6)]],
     });
   }

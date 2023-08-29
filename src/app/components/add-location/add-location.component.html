@@ -25,12 +25,12 @@
 
     <span
       *ngIf="
-        toiletForm.get('toiletId')?.hasError('maxlength') &&
+        toiletForm.get('toiletId')?.hasError('minlength') &&
         toiletForm.get('toiletId')?.touched
       "
       class="text-danger error-label"
     >
-    Point of Interest must have a max <strong>20 characters</strong></span
+    Point of Interest must have a minimum of <strong>6 characters</strong></span
     >
   </div>
   <div class="form-group">
