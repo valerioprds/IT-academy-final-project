@@ -21,6 +21,7 @@ import { RecoverPasswordComponent } from './components/recover-password/recover-
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'environments/environment';
 import { AddLocationComponent } from './components/add-location/add-location.component';
+import { AddLocationChildComponent } from './components/add-location-child/add-location-child.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddLocationComponent } from './components/add-location/add-location.com
     RecoverPasswordComponent,
     SpinnerComponent,
     AddLocationComponent,
+    AddLocationChildComponent,
 
 
 

@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddLocationComponent implements OnInit {
   toiletForm!: FormGroup;
+  toiledIdforChildComponent = '';
 
   constructor(
     private fb: FormBuilder,
@@ -49,5 +50,13 @@ export class AddLocationComponent implements OnInit {
         }
       }
     }
+  }
+
+  transferData() {
+    const toiletIdValue = this.toiletForm.get('toiletId')!.value;
+    this.toiledIdforChildComponent =
+      toiletIdValue ;
+
+    console.log(toiletIdValue);
   }
 }
