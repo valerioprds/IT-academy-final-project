@@ -2,7 +2,32 @@ img {
   width: 70px;
 }
 .overlay-button {
-  position: absolute; 
+  position: absolute;
   z-index: 1;
   margin: 20px;
+}
+
+
+/* Estilos básicos para el botón */
+.logout {
+  transition: all 0.3s ease-in-out;  /* Animación suave para todas las propiedades */
+  transform-origin: center;  /* Para que la transformación se haga desde el centro */
+}
+
+/* Efecto hover: cuando pasas el mouse por encima */
+.logout:hover {
+  background-color: #d32f2f;  /* Color de fondo rojo cuando pasas el mouse */
+  color: white;  /* Texto blanco */
+  transform: scale(1.07);  /* Hace que el botón crezca */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);  /* Añade una sombra para darle profundidad */
+}
+
+/* Efecto focus: cuando el botón está enfocado (por ejemplo, mediante tabulación) */
+.logout:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.5);  /* Añade un resplandor rojo alrededor del botón */
+}
+
+/* Efecto active: cuando el botón está siendo presionado */
+.btn-outline-danger:active {
+  transform: scale(0.95);  /* Hace que el botón se reduzca un 5% */
 }
