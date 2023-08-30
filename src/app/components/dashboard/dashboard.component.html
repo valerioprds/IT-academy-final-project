@@ -3,7 +3,10 @@
     class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom"
   >
     <div class="col-md-3 mb-2 mb-md-0">
-      <a [routerLink]="['/dashboard']" class="d-inline-flex link-body-emphasis text-decoration-none">
+      <a
+        [routerLink]="['/dashboard']"
+        class="d-inline-flex link-body-emphasis text-decoration-none"
+      >
         <svg
           class="bi"
           width="40"
@@ -14,12 +17,9 @@
           <use xlink:href="#bootstrap"></use>
         </svg>
 
-
-        <img src="/assets/img/Pictograms-nps-restrooms.svg.png" alt="">
+        <img src="/assets/img/Pictograms-nps-restrooms.svg.png" alt="" />
       </a>
     </div>
-
-
 
     <div class="col-md-3 text-end">
       <button
@@ -33,12 +33,10 @@
   </header>
 
   <div class="container my-3">
-  <!--   <h1 class="display-4 text-center">
-      <i class="fas fa-map-marked mr-4"></i> Toilet Locator
-    </h1> -->
-
-
-    <button [routerLink]="['/add-location']" class="btn btn-success overlay-button">
+    <button
+      [routerLink]="['/add-location']"
+      class="btn btn-success overlay-button"
+    >
       Add Toilet
     </button>
 
