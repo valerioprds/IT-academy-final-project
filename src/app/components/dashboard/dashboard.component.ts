@@ -3,6 +3,8 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import { MapService } from 'src/app/services/map.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddLocationComponent } from '../add-location/add-location.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +27,8 @@ export class DashboardComponent implements OnInit {
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
-    private mapService: MapService
+    private mapService: MapService,
+    private dialogRef: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -91,8 +94,16 @@ export class DashboardComponent implements OnInit {
         },
       });
     });
-
   }
+
+  openDialog() {
+    this.dialogRef.open(AddLocationComponent, {
+      width: '500px',   // You can set the desired width
+      height: '400px',  // You can set the desired height
+    });
+  }
+
+  
 
   LogOut() {
     this.afAuth.signOut().then(() => {

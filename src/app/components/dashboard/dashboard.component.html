@@ -33,12 +33,20 @@
   </header>
 
   <div class="container my-3">
-    <button
+    <!-- <button
       [routerLink]="['/add-location']"
       class="btn btn-success overlay-button"
     >
       Add Toilet
+    </button> -->
+
+    <button (click)="openDialog()" class="btn btn-success overlay-button">
+      Add Toilet
     </button>
+
+    <!-- <button class="btn btn-primary" (click)="openDialog()">
+      click to open popup
+    </button> -->
 
     <div id="map" style="width: 100%; height: 500px; border-radius: 5px"></div>
   </div>

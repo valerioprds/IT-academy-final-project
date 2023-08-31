@@ -22,6 +22,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'environments/environment';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { AddLocationChildComponent } from './components/add-location-child/add-location-child.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AddLocationChildComponent } from './components/add-location-child/add-l
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot( {positionClass: 'toast-top-full-width'}), // ToastrModule added
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
