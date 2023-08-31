@@ -32,6 +32,9 @@ export class MapService {
         toiletId: toilet.toiletId,
         icon: 'toilet',
       },
+      
     }));
+
+
   }
 }

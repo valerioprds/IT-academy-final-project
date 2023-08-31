@@ -91,6 +91,7 @@ export class DashboardComponent implements OnInit {
         },
       });
     });
+
   }
 
   LogOut() {
