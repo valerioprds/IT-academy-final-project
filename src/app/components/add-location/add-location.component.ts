@@ -29,6 +29,7 @@ export class AddLocationComponent implements OnInit {
 
   async onSubmit() {
     const header = new HttpHeaders({ contentType: 'application/json' });
+    const toiletIdValue = this.toiletForm.get('toiletId')!.value;
 
     if (this.toiletForm.valid) {
       try {
@@ -39,12 +40,12 @@ export class AddLocationComponent implements OnInit {
           .toPromise();
 
         if (response) {
-          this.toastr.success('toilet added succesfully');
+          this.toastr.success(`${toiletIdValue} has been added successfully`);
           this.router.navigate(['/dashboard']);
         }
       } catch (error: any) {
         if (error.status === 400) {
-          this.toastr.error('toilet already exists');
+          this.toastr.error(`${toiletIdValue} already exists`);
         } else {
           alert(error.message);
         }
@@ -54,8 +55,7 @@ export class AddLocationComponent implements OnInit {
 
   transferData() {
     const toiletIdValue = this.toiletForm.get('toiletId')!.value;
-    this.toiledIdforChildComponent =
-      toiletIdValue ;
+    this.toiledIdforChildComponent = toiletIdValue;
 
     console.log(toiletIdValue);
   }

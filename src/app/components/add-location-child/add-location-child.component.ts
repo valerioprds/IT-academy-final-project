@@ -6,6 +6,8 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./add-location-child.component.css']
 })
 export class AddLocationChildComponent {
+
+
   @Input() toiledIdforChildComponent!: string
 
 }

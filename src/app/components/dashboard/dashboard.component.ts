@@ -37,7 +37,6 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     }); */
-    //this.map.addControl(new mapboxgl.NavigationControl());
 
     this.initializeMap();
     this.getToilets();
