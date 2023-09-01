@@ -63,14 +63,14 @@
     Address must have a least <strong>6 digits</strong></span
   >
   <div class="mt-3">
-    <button (click)="transferData()"
+    <button
       type="submit"
       class="btn btn-primary"
       [disabled]="toiletForm.invalid"
     >
       Submit
     </button>
-    <a [routerLink]="['/dashboard']" class="btn btn-secondary ms-2">Back</a>
+    <button type="button" class="btn btn-secondary ms-2" (click)="onCancel()">Cancel</button>
   </div>
 
   <app-add-location-child [toiledIdforChildComponent]="toiledIdforChildComponent"></app-add-location-child>

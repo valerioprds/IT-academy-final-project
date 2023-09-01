@@ -97,13 +97,19 @@ export class DashboardComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogRef.open(AddLocationComponent, {
-      width: '500px',   // You can set the desired width
-      height: '400px',  // You can set the desired height
+    const dialogRef = this.dialogRef.open(AddLocationComponent, {
+      width: '500px',
+      height: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'added') {
+        // Fetch the latest list of toilets and update the map.
+        this.initializeMap();
+        this.getToilets();
+      }
     });
   }
-
-  
 
   LogOut() {
     this.afAuth.signOut().then(() => {

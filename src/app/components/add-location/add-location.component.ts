@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-location',
@@ -17,7 +18,9 @@ export class AddLocationComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    public dialogRef: MatDialogRef<AddLocationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit() {
@@ -51,12 +54,18 @@ export class AddLocationComponent implements OnInit {
         }
       }
     }
+    this.dialogRef.close('added')
   }
 
-  transferData() {
+
+  onCancel() {
+    this.dialogRef.close('canceled');
+  }
+
+  /*   transferData() {
     const toiletIdValue = this.toiletForm.get('toiletId')!.value;
     this.toiledIdforChildComponent = toiletIdValue;
 
     console.log(toiletIdValue);
-  }
+  } */
 }
