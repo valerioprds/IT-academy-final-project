@@ -1,8 +1,9 @@
 <div class="container my-3">
   <h1 class="display-4 text-center">Add Toilet</h1>
 </div>
-<form [formGroup]="toiletForm" (ngSubmit)="onSubmit()">
-  <div class="form-group">
+<div class="form-container">
+<form [formGroup]="toiletForm"  style="border: 3px solid red;" (ngSubmit)="onSubmit()">
+  <div class="form-group ">
     <label for="toilet-id">Point of Interest</label>
     <input
       type="text"
@@ -75,3 +76,4 @@
 
   <app-add-location-child [toiledIdforChildComponent]="toiledIdforChildComponent"></app-add-location-child>
 </form>
+</div>

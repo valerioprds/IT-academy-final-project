@@ -14,7 +14,7 @@ const routes: Routes = [
   { path: 'email-verification', component: EmailVerificationComponent },
   { path: 'recover-password', component: RecoverPasswordComponent },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'add-location', component: AddLocationComponent },
+  
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 
 ];
