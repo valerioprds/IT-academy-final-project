@@ -100,6 +100,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
       width: '500px',
       height: '400px',
+      
     });
 
     dialogRef.afterClosed().subscribe((result) => {
