@@ -65,6 +65,8 @@ export class DashboardComponent implements OnInit {
         showUserHeading: true,
       })
     );
+
+
   }
 
   async getToilets() {
@@ -93,14 +95,35 @@ export class DashboardComponent implements OnInit {
           'text-anchor': 'top',
         },
       });
+
+      // Add event listener for when a point is clicked
+      this.map.on('click', 'points', (e) => {
+        if (e.features!.length) {
+          const feature = e.features![0];
+          const popup = new mapboxgl.Popup({ offset: 25 }) // add popup offset
+            .setLngLat(e.lngLat)
+            .setHTML('<p>Toilet ID: ' + feature.properties! + '</p>')
+            .addTo(this.map);
+        }
+      });
+
+      // Change the cursor to a pointer when hovering over a point.
+      this.map.on('mouseenter', 'points', () => {
+        this.map.getCanvas().style.cursor = 'pointer';
+      });
+
+      // Change it back to a hand when it leaves.
+      this.map.on('mouseleave', 'points', () => {
+        this.map.getCanvas().style.cursor = '';
+      });
     });
-  }
+}
+
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
       width: '500px',
       height: '400px',
-      
     });
 
     dialogRef.afterClosed().subscribe((result) => {

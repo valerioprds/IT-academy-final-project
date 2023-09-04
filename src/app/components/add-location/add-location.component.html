@@ -4,10 +4,9 @@
 <div class="form-container">
   <form
     [formGroup]="toiletForm"
-    style="border: 3px solid red"
     (ngSubmit)="onSubmit()"
   >
-    <div class="form-group">
+    <div class="form-group mx-3">
       <label for="toilet-id">Point of Interest</label>
       <input
         type="text"
@@ -38,7 +37,7 @@
         <strong>6 characters</strong></span
       >
     </div>
-    <div class="form-group">
+    <div class="form-group mx-3">
       <label for="address">Toilet address</label>
       <input
         type="text"
@@ -67,7 +66,7 @@
     >
       Address must have a least <strong>6 digits</strong></span
     >
-    <div class="mt-3">
+    <div class="m-3 ">
       <button
         type="submit"
         class="btn btn-primary"

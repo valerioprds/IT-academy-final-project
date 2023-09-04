@@ -12,7 +12,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddLocationComponent implements OnInit {
   toiletForm!: FormGroup;
-  toiledIdforChildComponent = '';
+ // toiledIdforChildComponent = '';
 
   constructor(
     private fb: FormBuilder,
