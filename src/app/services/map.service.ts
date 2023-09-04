@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import mapboxgl from 'mapbox-gl';
+import { AddLocationChildComponent } from '../components/add-location-child/add-location-child.component';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,9 @@ export class MapService {
   }
 
   async getToilets() {
-    const res: any = await this.http.get('http://localhost:5000/api/v1/toilets').toPromise();
+    const res: any = await this.http
+      .get('http://localhost:5000/api/v1/toilets')
+      .toPromise();
     return res.data.map((toilet: any) => ({
       type: 'Feature',
       geometry: {
@@ -31,10 +34,9 @@ export class MapService {
       properties: {
         toiletId: toilet.toiletId,
         icon: 'toilet',
+        location: toilet.location.formattedAddress,
       },
-      
     }));
-
 
   }
 }

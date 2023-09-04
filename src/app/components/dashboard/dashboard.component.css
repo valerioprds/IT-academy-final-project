@@ -99,3 +99,7 @@ img {
 .Btn:active {
   transform: translate(2px ,2px);
 }
+.popup-content {
+  font-size: 60px;
+  /* Any other styles you want to apply */
+}

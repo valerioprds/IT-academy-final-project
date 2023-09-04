@@ -13,7 +13,6 @@ import { AddLocationComponent } from '../add-location/add-location.component';
 })
 export class DashboardComponent implements OnInit {
   dataUser: any = {};
-  coordinates: any = {}; // Initialize as an empty object
 
   toiletLocations: any = [];
 
@@ -49,7 +48,7 @@ export class DashboardComponent implements OnInit {
     this.map = new mapboxgl.Map({
       container: 'map',
       style: this.mapService.getMapStyle(),
-      zoom: 14.5,
+      zoom: 14,
       center: [this.lng, this.lat],
     });
     this.map.addControl(new mapboxgl.NavigationControl());
@@ -65,8 +64,6 @@ export class DashboardComponent implements OnInit {
         showUserHeading: true,
       })
     );
-
-
   }
 
   async getToilets() {
@@ -99,11 +96,13 @@ export class DashboardComponent implements OnInit {
       // Add event listener for when a point is clicked
       this.map.on('click', 'points', (e) => {
         if (e.features!.length) {
+          console.log(e.features!);
           const feature = e.features![0];
           const popup = new mapboxgl.Popup({ offset: 25 }) // add popup offset
             .setLngLat(e.lngLat)
-            .setHTML('<p>Toilet ID: ' + feature.properties! + '</p>')
+            .setHTML('<p style="font-size: 16px;"> <strong>Address:</strong>' + feature.properties!['location'] + '</p>')
             .addTo(this.map);
+          console.log('from pop up   ' + feature.properties);
         }
       });
 
@@ -117,8 +116,7 @@ export class DashboardComponent implements OnInit {
         this.map.getCanvas().style.cursor = '';
       });
     });
-}
-
+  }
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
