@@ -29,6 +29,14 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.afAuth.currentUser.then((user) => {
+      if (user && user.emailVerified) {
+        this.dataUser = user;
+        console.log(user);
+      } else {
+        this.router.navigate(['/login']);
+      }
+    });
     this.initializeMap();
     this.getToilets();
   }
@@ -55,7 +63,7 @@ export class DashboardComponent implements OnInit {
     this.directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'metric',
-      profile: 'mapbox/walking'
+      profile: 'mapbox/walking',
     });
     this.map.addControl(this.directions, 'bottom-left');
 
@@ -65,7 +73,10 @@ export class DashboardComponent implements OnInit {
       // Set user's current location as origin
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
-          this.directions.setOrigin([position.coords.longitude, position.coords.latitude]); // Highlighted correction
+          this.directions.setOrigin([
+            position.coords.longitude,
+            position.coords.latitude,
+          ]); // Highlighted correction
         });
       }
     });
@@ -78,7 +89,8 @@ export class DashboardComponent implements OnInit {
 
   loadMapData(toilets: any = []) {
     // Check if the layer already exists
-    if (!this.map.getLayer('points')) { // <-- This is the check
+    if (!this.map.getLayer('points')) {
+      // <-- This is the check
       this.map.addLayer({
         id: 'points',
         type: 'symbol',
