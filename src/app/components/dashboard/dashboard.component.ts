@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
       unit: 'metric',
       profile: 'mapbox/walking'
     });
-    this.map.addControl(this.directions, 'top-right');
+    this.map.addControl(this.directions, 'bottom-left');
 
     this.map.on('load', () => {
       this.loadMapData();
@@ -77,37 +77,30 @@ export class DashboardComponent implements OnInit {
   }
 
   loadMapData(toilets: any = []) {
-    this.map.addLayer({
-      id: 'points',
-      type: 'symbol',
-      source: {
-        type: 'geojson',
-        data: {
-          type: 'FeatureCollection',
-          features: toilets,
+    // Check if the layer already exists
+    if (!this.map.getLayer('points')) { // <-- This is the check
+      this.map.addLayer({
+        id: 'points',
+        type: 'symbol',
+        source: {
+          type: 'geojson',
+          data: {
+            type: 'FeatureCollection',
+            features: toilets,
+          },
         },
-      },
-      layout: {
-        'icon-image': '{icon}-15',
-        'icon-size': 2,
-        'text-field': '{toiletId}',
-        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-        'text-offset': [0, 0.9],
-        'text-anchor': 'top',
-      },
-    });
+        layout: {
+          'icon-image': '{icon}-15',
+          'icon-size': 2,
+          'text-field': '{toiletId}',
+          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+          'text-offset': [0, 0.9],
+          'text-anchor': 'top',
+        },
+      });
+    }
 
-    this.map.on('click', 'points', (e) => {
-      if (e.features!.length) {
-        const feature = e.features![0];
-        const popup = new mapboxgl.Popup({ offset: 25 })
-          .setLngLat(e.lngLat)
-          .setHTML('<p style="font-size: 16px;"> <strong>Address:</strong>' + feature.properties!['location'] + '</p>')
-          .addTo(this.map);
-
-        this.directions.setDestination(e.lngLat);
-      }
-    });
+    /* cut here+------------------------ */
 
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
