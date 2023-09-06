@@ -29,17 +29,18 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.afAuth.currentUser.then((user) => {
+   /*  this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
         console.log(user);
       } else {
         this.router.navigate(['/login']);
       }
-    });
+    }); */
     this.initializeMap();
-    this.getToilets();
   }
+
+  
 
   initializeMap() {
     this.map = new mapboxgl.Map({
@@ -67,30 +68,27 @@ export class DashboardComponent implements OnInit {
     });
     this.map.addControl(this.directions, 'bottom-left');
 
-    this.map.on('load', () => {
-      this.loadMapData();
+    this.map.on('load', async () => { // Made this async
+      const toilets = await this.getToilets();
+      this.loadMapData(toilets);
 
-      // Set user's current location as origin
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           this.directions.setOrigin([
             position.coords.longitude,
             position.coords.latitude,
-          ]); // Highlighted correction
+          ]);
         });
       }
     });
   }
 
   async getToilets() {
-    const toilets = await this.mapService.getToilets();
-    this.loadMapData(toilets);
+    return await this.mapService.getToilets(); // return the toilets
   }
 
   loadMapData(toilets: any = []) {
-    // Check if the layer already exists
     if (!this.map.getLayer('points')) {
-      // <-- This is the check
       this.map.addLayer({
         id: 'points',
         type: 'symbol',
@@ -111,8 +109,6 @@ export class DashboardComponent implements OnInit {
         },
       });
     }
-
-    /* cut here+------------------------ */
 
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';

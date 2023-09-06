@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import mapboxgl from 'mapbox-gl';
-import { AddLocationChildComponent } from '../components/add-location-child/add-location-child.component';
 
 @Injectable({
   providedIn: 'root',
