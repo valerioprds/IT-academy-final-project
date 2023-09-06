@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import { MapService } from 'src/app/services/map.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddLocationComponent } from '../add-location/add-location.component';
+import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,15 +14,12 @@ import { AddLocationComponent } from '../add-location/add-location.component';
 })
 export class DashboardComponent implements OnInit {
   dataUser: any = {};
-
   toiletLocations: any = [];
-
   map!: mapboxgl.Map;
   style = 'mapbox://styles/mapbox/streets-v11';
-
-  // coordenadas plaza españa
   lng = 2.1492734541257676;
   lat = 41.37519894542312;
+  directions!: any;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -31,15 +29,6 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /* this.afAuth.currentUser.then((user) => {
-      if (user && user.emailVerified) {
-        this.dataUser = user;
-        console.log(user);
-      } else {
-        this.router.navigate(['/login']);
-      }
-    }); */
-
     this.initializeMap();
     this.getToilets();
   }
@@ -51,70 +40,81 @@ export class DashboardComponent implements OnInit {
       zoom: 14,
       center: [this.lng, this.lat],
     });
-    this.map.addControl(new mapboxgl.NavigationControl());
 
+    this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
           enableHighAccuracy: true,
         },
-        // When active the map will receive updates to the device's location as it changes.
         trackUserLocation: true,
-        // Draw an arrow next to the location dot to indicate which direction the device is heading.
         showUserHeading: true,
       })
     );
+
+    this.directions = new MapboxDirections({
+      accessToken: mapboxgl.accessToken,
+      unit: 'metric',
+      profile: 'mapbox/walking'
+    });
+    this.map.addControl(this.directions, 'top-right');
+
+    this.map.on('load', () => {
+      this.loadMapData();
+
+      // Set user's current location as origin
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.directions.setOrigin([position.coords.longitude, position.coords.latitude]); // Highlighted correction
+        });
+      }
+    });
   }
 
   async getToilets() {
     const toilets = await this.mapService.getToilets();
-    this.loadMap(toilets);
+    this.loadMapData(toilets);
   }
 
-  loadMap(toilets: any) {
-    this.map.on('load', () => {
-      this.map.addLayer({
-        id: 'points',
-        type: 'symbol',
-        source: {
-          type: 'geojson',
-          data: {
-            type: 'FeatureCollection',
-            features: toilets,
-          },
+  loadMapData(toilets: any = []) {
+    this.map.addLayer({
+      id: 'points',
+      type: 'symbol',
+      source: {
+        type: 'geojson',
+        data: {
+          type: 'FeatureCollection',
+          features: toilets,
         },
-        layout: {
-          'icon-image': '{icon}-15',
-          'icon-size': 2,
-          'text-field': '{toiletId}',
-          'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
-          'text-offset': [0, 0.9],
-          'text-anchor': 'top',
-        },
-      });
+      },
+      layout: {
+        'icon-image': '{icon}-15',
+        'icon-size': 2,
+        'text-field': '{toiletId}',
+        'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
+        'text-offset': [0, 0.9],
+        'text-anchor': 'top',
+      },
+    });
 
-      // Add event listener for when a point is clicked
-      this.map.on('click', 'points', (e) => {
-        if (e.features!.length) {
-          console.log(e.features!);
-          const feature = e.features![0];
-          const popup = new mapboxgl.Popup({ offset: 25 }) // add popup offset
-            .setLngLat(e.lngLat)
-            .setHTML('<p style="font-size: 16px;"> <strong>Address:</strong>' + feature.properties!['location'] + '</p>')
-            .addTo(this.map);
-          console.log('from pop up   ' + feature.properties);
-        }
-      });
+    this.map.on('click', 'points', (e) => {
+      if (e.features!.length) {
+        const feature = e.features![0];
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setLngLat(e.lngLat)
+          .setHTML('<p style="font-size: 16px;"> <strong>Address:</strong>' + feature.properties!['location'] + '</p>')
+          .addTo(this.map);
 
-      // Change the cursor to a pointer when hovering over a point.
-      this.map.on('mouseenter', 'points', () => {
-        this.map.getCanvas().style.cursor = 'pointer';
-      });
+        this.directions.setDestination(e.lngLat);
+      }
+    });
 
-      // Change it back to a hand when it leaves.
-      this.map.on('mouseleave', 'points', () => {
-        this.map.getCanvas().style.cursor = '';
-      });
+    this.map.on('mouseenter', 'points', () => {
+      this.map.getCanvas().style.cursor = 'pointer';
+    });
+
+    this.map.on('mouseleave', 'points', () => {
+      this.map.getCanvas().style.cursor = '';
     });
   }
 
@@ -126,7 +126,6 @@ export class DashboardComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'added') {
-        // Fetch the latest list of toilets and update the map.
         this.initializeMap();
         this.getToilets();
       }
