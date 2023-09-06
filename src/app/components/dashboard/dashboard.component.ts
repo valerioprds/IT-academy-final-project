@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-   /*  this.afAuth.currentUser.then((user) => {
+    /*  this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
         console.log(user);
@@ -39,8 +39,6 @@ export class DashboardComponent implements OnInit {
     }); */
     this.initializeMap();
   }
-
-  
 
   initializeMap() {
     this.map = new mapboxgl.Map({
@@ -68,7 +66,8 @@ export class DashboardComponent implements OnInit {
     });
     this.map.addControl(this.directions, 'bottom-left');
 
-    this.map.on('load', async () => { // Made this async
+    this.map.on('load', async () => {
+      // Made this async
       const toilets = await this.getToilets();
       this.loadMapData(toilets);
 
@@ -109,6 +108,23 @@ export class DashboardComponent implements OnInit {
         },
       });
     }
+
+    // Add event listener for when a point is clicked
+    this.map.on('click', 'points', (e) => {
+      if (e.features!.length) {
+        console.log(e.features!);
+        const feature = e.features![0];
+        const popup = new mapboxgl.Popup({ offset: 25 }) // add popup offset
+          .setLngLat(e.lngLat)
+          .setHTML(
+            '<p style="font-size: 16px;"> <strong>Address:</strong>' +
+              feature.properties!['location'] +
+              '</p>'
+          )
+          .addTo(this.map);
+        console.log('from pop up   ' + feature.properties);
+      }
+    });
 
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
