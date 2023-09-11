@@ -20,7 +20,10 @@ export class DashboardComponent implements OnInit {
   lng = 2.1492734541257676;
   lat = 41.37519894542312;
   directions!: any;
-  userCurrentLocation: mapboxgl.LngLat = new mapboxgl.LngLat(this.lng, this.lat); // User's initial location
+  userCurrentLocation: mapboxgl.LngLat = new mapboxgl.LngLat(
+    this.lng,
+    this.lat
+  ); // User's initial location
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -30,18 +33,21 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-      this.afAuth.currentUser.then((user) => {
+   /*  this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
         console.log(user);
       } else {
         this.router.navigate(['/login']);
       }
-    });
+    }); */
     this.initializeMap();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
-        this.userCurrentLocation = new mapboxgl.LngLat(position.coords.longitude, position.coords.latitude);
+        this.userCurrentLocation = new mapboxgl.LngLat(
+          position.coords.longitude,
+          position.coords.latitude
+        );
         this.directions.setOrigin(this.userCurrentLocation.toArray());
       });
     }
@@ -77,6 +83,14 @@ export class DashboardComponent implements OnInit {
     this.map.on('load', async () => {
       const toilets = await this.getToilets();
       this.loadMapData(toilets);
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+          this.directions.setOrigin([
+            position.coords.longitude,
+            position.coords.latitude,
+          ]);
+        });
+      }
     });
   }
 
@@ -137,7 +151,10 @@ export class DashboardComponent implements OnInit {
     const toilets = await this.getToilets();
     const nearestToilet = this.findNearestToilet(toilets);
     if (nearestToilet) {
-      const destination = new mapboxgl.LngLat(nearestToilet.geometry.coordinates[0], nearestToilet.geometry.coordinates[1]);
+      const destination = new mapboxgl.LngLat(
+        nearestToilet.geometry.coordinates[0],
+        nearestToilet.geometry.coordinates[1]
+      );
       this.directions.setDestination(destination.toArray());
     }
   }
@@ -146,8 +163,11 @@ export class DashboardComponent implements OnInit {
     let nearestDistance = Infinity;
     let nearestToilet = null;
 
-    toilets.forEach(toilet => {
-      const toiletLocation = new mapboxgl.LngLat(toilet.geometry.coordinates[0], toilet.geometry.coordinates[1]);
+    toilets.forEach((toilet) => {
+      const toiletLocation = new mapboxgl.LngLat(
+        toilet.geometry.coordinates[0],
+        toilet.geometry.coordinates[1]
+      );
       const distance = this.userCurrentLocation.distanceTo(toiletLocation);
 
       if (distance < nearestDistance) {

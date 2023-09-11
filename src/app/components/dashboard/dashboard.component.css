@@ -82,3 +82,16 @@ img {
 .Btn:active {
   transform: translate(2px, 2px);
 }
+
+
+
+/* @keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.btn-emergency {
+  animation: pulse 1s infinite;
+}
+ */
