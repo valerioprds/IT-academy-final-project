@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   lng = 2.1492734541257676;
   lat = 41.37519894542312;
   directions!: any;
+  userCurrentLocation: mapboxgl.LngLat = new mapboxgl.LngLat(this.lng, this.lat); // User's initial location
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -29,15 +30,21 @@ export class DashboardComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    /*  this.afAuth.currentUser.then((user) => {
+      this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
         console.log(user);
       } else {
         this.router.navigate(['/login']);
       }
-    }); */
+    });
     this.initializeMap();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.userCurrentLocation = new mapboxgl.LngLat(position.coords.longitude, position.coords.latitude);
+        this.directions.setOrigin(this.userCurrentLocation.toArray());
+      });
+    }
   }
 
   initializeMap() {
@@ -47,8 +54,6 @@ export class DashboardComponent implements OnInit {
       zoom: 14,
       center: [this.lng, this.lat],
     });
-
-
 
     this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(
@@ -70,18 +75,8 @@ export class DashboardComponent implements OnInit {
     this.map.addControl(this.directions, 'bottom-left');
 
     this.map.on('load', async () => {
-      // Made this async
       const toilets = await this.getToilets();
       this.loadMapData(toilets);
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-          this.directions.setOrigin([
-            position.coords.longitude,
-            position.coords.latitude,
-          ]);
-        });
-      }
     });
   }
 
@@ -136,6 +131,32 @@ export class DashboardComponent implements OnInit {
     this.map.on('mouseleave', 'points', () => {
       this.map.getCanvas().style.cursor = '';
     });
+  }
+
+  async navigateToNearestToilet() {
+    const toilets = await this.getToilets();
+    const nearestToilet = this.findNearestToilet(toilets);
+    if (nearestToilet) {
+      const destination = new mapboxgl.LngLat(nearestToilet.geometry.coordinates[0], nearestToilet.geometry.coordinates[1]);
+      this.directions.setDestination(destination.toArray());
+    }
+  }
+
+  findNearestToilet(toilets: any[]): any {
+    let nearestDistance = Infinity;
+    let nearestToilet = null;
+
+    toilets.forEach(toilet => {
+      const toiletLocation = new mapboxgl.LngLat(toilet.geometry.coordinates[0], toilet.geometry.coordinates[1]);
+      const distance = this.userCurrentLocation.distanceTo(toiletLocation);
+
+      if (distance < nearestDistance) {
+        nearestDistance = distance;
+        nearestToilet = toilet;
+      }
+    });
+
+    return nearestToilet;
   }
 
   openDialog() {
