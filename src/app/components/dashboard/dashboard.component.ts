@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
@@ -6,6 +6,8 @@ import { MapService } from 'src/app/services/map.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddLocationComponent } from '../add-location/add-location.component';
 import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import { MatSidenav } from '@angular/material/sidenav';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,15 +27,19 @@ export class DashboardComponent implements OnInit {
     this.lat
   ); // User's initial location
 
+  @ViewChild(MatSidenav)
+  sidenav!: MatSidenav;
+
   constructor(
     private afAuth: AngularFireAuth,
     private router: Router,
     private mapService: MapService,
-    private dialogRef: MatDialog
+    private dialogRef: MatDialog,
+    private observer: BreakpointObserver
   ) {}
 
   ngOnInit(): void {
-   /*  this.afAuth.currentUser.then((user) => {
+    /*  this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
         console.log(user);
@@ -51,6 +57,18 @@ export class DashboardComponent implements OnInit {
         this.directions.setOrigin(this.userCurrentLocation.toArray());
       });
     }
+  }
+
+  ngAfterViewInit() {
+    this.observer.observe(['(max-width:800px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
   }
 
   initializeMap() {
@@ -78,7 +96,7 @@ export class DashboardComponent implements OnInit {
       unit: 'metric',
       profile: 'mapbox/walking',
     });
-    this.map.addControl(this.directions, 'bottom-left');
+    this.map.addControl(this.directions, 'top-left');
 
     this.map.on('load', async () => {
       const toilets = await this.getToilets();

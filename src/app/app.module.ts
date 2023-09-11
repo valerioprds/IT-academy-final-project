@@ -8,8 +8,11 @@ import { AngularFireModule } from '@angular/fire/compat'; // Importa AngularFire
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-
-
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
 
 //components
 import { AppComponent } from './app.component';
@@ -33,10 +36,6 @@ import { MatDialogModule } from '@angular/material/dialog';
     RecoverPasswordComponent,
     SpinnerComponent,
     AddLocationComponent,
-
-
-
-
   ],
   imports: [
     BrowserModule,
@@ -44,11 +43,16 @@ import { MatDialogModule } from '@angular/material/dialog';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot( {positionClass: 'toast-top-full-width'}), // ToastrModule added
+    ToastrModule.forRoot({ positionClass: 'toast-top-full-width' }), // ToastrModule added
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

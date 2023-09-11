@@ -1,19 +1,12 @@
 .map-container {
   position: relative;
-
   width: 100%;
   height: 500px;
   z-index: 50;
 }
 
-img {
-  width: 70px;
-}
-.open-dialog {
-  position: absolute;
-  z-index: 100;
-  margin: 20px;
-}
+
+
 
 /* logout button */
 .Btn {
@@ -83,15 +76,82 @@ img {
   transform: translate(2px, 2px);
 }
 
+/* end of css effects on logout button */
 
 
-/* @keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
+
+.mat-toolbar {
+  background-color: navy;
+  color: white;
 }
 
-.btn-emergency {
-  animation: pulse 1s infinite;
+.mat-sidenav {
+  margin: 16px;
+  width: 200px;
+  border-right: none;
+  background: #002bc5;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
 }
- */
+
+.mat-sidenav-container {
+  height: calc(100vh - 65px);
+}
+
+.content {
+  height: calc(100vh - 98px);
+  margin: 16px;
+  margin-left: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  color: lightgray;
+
+  border-radius: 10px;
+}
+
+mat-icon {
+  color: white;
+}
+
+mat-sidenav span {
+  color: white;
+}
+
+.menu-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+
+  mat-icon {
+    margin-right: 8px;
+  }
+}
+
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+}
+
+.designation {
+  margin-top: 2px;
+  font-size: 0.7rem;
+  color: lightgrey;
+}
+
+mat-divider {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
