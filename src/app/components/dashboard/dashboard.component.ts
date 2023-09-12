@@ -8,6 +8,7 @@ import { AddLocationComponent } from '../add-location/add-location.component';
 import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,18 +36,19 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private mapService: MapService,
     private dialogRef: MatDialog,
-    private observer: BreakpointObserver
+    private observer: BreakpointObserver,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    /*  this.afAuth.currentUser.then((user) => {
+    this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
         console.log(user);
       } else {
         this.router.navigate(['/login']);
       }
-    }); */
+    });
     this.initializeMap();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -68,6 +70,7 @@ export class DashboardComponent implements OnInit {
         this.sidenav.mode = 'side';
         this.sidenav.open();
       }
+      this.cdRef.detectChanges();
     });
   }
 

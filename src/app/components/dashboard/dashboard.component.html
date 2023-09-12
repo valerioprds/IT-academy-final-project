@@ -14,17 +14,17 @@
     <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon *ngIf="sidenav.opened">close</mat-icon>
   </button>
-  Responsive sidebar navigation
+  Responsive sidebar navigation  {{dataUser}}
 </mat-toolbar>
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
     <!--  mode side means that with big screen it will always display on the side -->
     <img
-      src="https://as1.ftcdn.net/v2/jpg/02/25/23/26/1000_F_225232614_szJ2lAXcesEFgIxpCWulTRT7sm6a7AZq.jpg"
+    src="/assets/img/man-on-toilet.png"
       class="avatar mat-elevation-z8"
     />
     <h4 class="name">Your Toilet Stop</h4>
-    <p class="designation">add small description  here</p>
+    <p class="designation">add small description here</p>
     <!-- buttons  -->
 
     <mat-divider></mat-divider>
@@ -32,7 +32,11 @@
     <button mat-button class="menu-button" (click)="openDialog()">
       <mat-icon> add_location</mat-icon> <span>Add a new Toilet</span>
     </button>
-    <button mat-button class="menu-button emergency-button" (click)="navigateToNearestToilet()">
+    <button
+      mat-button
+      class="menu-button emergency-button"
+      (click)="navigateToNearestToilet()"
+    >
       <mat-icon>wc</mat-icon>
       <span>Emergency Toilet</span>
     </button>
