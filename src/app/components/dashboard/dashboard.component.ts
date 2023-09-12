@@ -150,7 +150,7 @@ export class DashboardComponent implements OnInit {
         const popup = new mapboxgl.Popup({ offset: 25 }) // add popup offset
           .setLngLat(e.lngLat)
           .setHTML(
-            '<p style="font-size: 16px;"> <strong>Address:</strong>' +
+            '<p class="popup" style="font-size: 16px; color: black"> <strong>Address:</strong>' +
               feature.properties!['location'] +
               '</p>'
           )
