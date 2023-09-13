@@ -51,7 +51,7 @@ export class DashboardComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-   // this.getUserVerification();
+    // this.getUserVerification();
     this.initializeMap();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
