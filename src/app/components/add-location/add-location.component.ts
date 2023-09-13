@@ -43,12 +43,12 @@ export class AddLocationComponent implements OnInit {
           .toPromise();
 
         if (response) {
-          this.toastr.success(`${toiletIdValue} has been added successfully`);
+          this.toastr.success(`${toiletIdValue} has been added successfully`, 'Success');
           this.router.navigate(['/dashboard']);
         }
       } catch (error: any) {
         if (error.status === 400) {
-          this.toastr.error(`${toiletIdValue} already exists`);
+          this.toastr.error(`${toiletIdValue} already exists`, 'Error');
         } else {
           alert(error.message);
         }

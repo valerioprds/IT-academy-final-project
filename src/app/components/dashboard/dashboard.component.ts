@@ -40,7 +40,7 @@ export class DashboardComponent implements OnInit {
     private cdRef: ChangeDetectorRef
   ) {}
 
-  ngOnInit(): void {
+  getUserVerification() {
     this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
@@ -49,6 +49,9 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/login']);
       }
     });
+  }
+  ngOnInit(): void {
+   // this.getUserVerification();
     this.initializeMap();
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
