@@ -25,6 +25,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'environments/environment';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { RatingComponent } from './components/rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     RecoverPasswordComponent,
     SpinnerComponent,
     AddLocationComponent,
+    RatingComponent,
   ],
   imports: [
     BrowserModule,

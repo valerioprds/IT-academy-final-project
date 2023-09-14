@@ -201,6 +201,8 @@ export class DashboardComponent implements OnInit {
           rateButton.addEventListener('click', () => {
             // Handle the rating logic here,
             // maybe opening a modal where users can select the rating
+            '<button mat-button (click)="openDialog()">Open Dialog</button>'
+
           });
         }
       }
