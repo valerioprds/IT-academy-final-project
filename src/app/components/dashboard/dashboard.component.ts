@@ -157,7 +157,7 @@ export class DashboardComponent implements OnInit {
     }
 
     // Add event listener for when a point is clicked
-    this.map.on('click', 'points', (e) => {
+    /* this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
       if (e.features!.length) {
         console.log(e.features!);
@@ -172,7 +172,42 @@ export class DashboardComponent implements OnInit {
           .addTo(this.map);
         console.log('from pop up   ' + feature.properties);
       }
+    }); */
+
+
+
+    this.map.on('click', 'points', (e) => {
+      console.log('hello from on click ');
+      if (e.features!.length) {
+        console.log(e.features!);
+        const feature = e.features![0];
+        const popupContent = `
+          <p class="popup" style="font-size: 16px; color: black">
+            <strong>Address:</strong>${feature.properties!['location']}
+            <div id="rating-stars">
+              <!-- Here you'll represent the rating with stars (e.g., ★★★☆☆) -->
+              ${Array(5).fill('☆').map((star, index) =>
+                  index < feature.properties!['rating'] ? '★' : star).join('')}
+            </div>
+            <button id="rate-button">Rate</button>
+          </p>
+        `;
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setLngLat(e.lngLat)
+          .setHTML(popupContent)
+          .addTo(this.map);
+        const rateButton = document.getElementById('rate-button');
+        if (rateButton) {
+          rateButton.addEventListener('click', () => {
+            // Handle the rating logic here,
+            // maybe opening a modal where users can select the rating
+          });
+        }
+      }
     });
+
+
+
 
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
