@@ -36,6 +36,15 @@ export class MapService {
         location: toilet.location.formattedAddress,
       },
     }));
+  }
 
+  async updateRating(toiletId: string, newRating: number) {
+    const data = {
+      rating: newRating,
+    };
+    const res: any = await this.http
+      .post(`http://localhost:5000/api/v1/toilets/${toiletId}/rate`, data)
+      .toPromise();
+    return res.data;
   }
 }

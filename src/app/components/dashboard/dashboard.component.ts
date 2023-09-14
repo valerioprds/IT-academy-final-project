@@ -1,14 +1,15 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Router } from '@angular/router';
 import * as mapboxgl from 'mapbox-gl';
 import { MapService } from 'src/app/services/map.service';
-import { MatDialog } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { AddLocationComponent } from '../add-location/add-location.component';
 import * as MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,8 +29,17 @@ export class DashboardComponent implements OnInit {
     this.lat
   ); // User's initial location
 
+  ratingCount = 0;
+  totalRating = 0;
+
+  finalRating: any;
+
+  ratingControl = new FormControl(0);
+
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
+
+  @Input() toiletId: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -107,6 +117,7 @@ export class DashboardComponent implements OnInit {
     this.map.on('load', async () => {
       const toilets = await this.getToilets();
       this.loadMapData(toilets);
+
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {
           this.directions.setOrigin([
@@ -147,6 +158,7 @@ export class DashboardComponent implements OnInit {
 
     // Add event listener for when a point is clicked
     this.map.on('click', 'points', (e) => {
+      console.log('hello from on click ');
       if (e.features!.length) {
         console.log(e.features!);
         const feature = e.features![0];
@@ -155,7 +167,7 @@ export class DashboardComponent implements OnInit {
           .setHTML(
             '<p class="popup" style="font-size: 16px; color: black"> <strong>Address:</strong>' +
               feature.properties!['location'] +
-              '</p>'
+              ' <button>My Button</button></p> '
           )
           .addTo(this.map);
         console.log('from pop up   ' + feature.properties);
@@ -215,6 +227,23 @@ export class DashboardComponent implements OnInit {
         this.getToilets();
       }
     });
+  }
+
+  async getRating() {
+    this.ratingCount++;
+    this.totalRating += this.ratingControl.value || 0;
+    this.finalRating = (this.totalRating / this.ratingCount).toFixed(2);
+
+    // Assuming you have the toiletId available in this component
+    try {
+      await this.mapService.updateRating(
+        this.toiletId,
+        this.ratingControl.value
+      );
+    } catch (err) {
+      console.error('Failed to update rating:', err);
+      // Handle the error appropriately, such as displaying a message to the user
+    }
   }
 
   LogOut() {
