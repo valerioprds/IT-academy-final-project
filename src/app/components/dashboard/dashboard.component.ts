@@ -160,7 +160,7 @@ export class DashboardComponent implements OnInit {
     }
 
     // Add event listener for when a point is clicked
-     this.map.on('click', 'points', (e) => {
+   /*   this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
       if (e.features!.length) {
         console.log(e.features!);
@@ -175,8 +175,40 @@ export class DashboardComponent implements OnInit {
           .addTo(this.map);
         console.log('from pop up   ' + feature.properties);
       }
-    });
+    }); */
 
+    this.map.on('click', 'points', (e) => {
+      console.log('hello from on click ');
+      if (e.features && e.features.length) {
+        console.log(e.features);
+        const feature = e.features[0];
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setLngLat(e.lngLat)
+          .setHTML(`
+          <p class="popup" style="font-size: 16px; color: black">
+            <strong>Dirección:</strong>${feature.properties['location']}
+            <button id="rate-button">Calificar</button>
+          </p>
+          `)
+          .addTo(this.map);
+        console.log('from pop up   ' + feature.properties);
+
+        // Open the modal when 'rate-button' is clicked
+        document.getElementById('rate-button').addEventListener('click', function() {
+          const modal = document.getElementById('myModal');
+          modal.style.display = "block";
+          const closeBtn = document.querySelector('.close') as HTMLElement;
+          closeBtn.onclick = function() {
+            modal.style.display = "none";
+          }
+          window.onclick = function(event) {
+            if (event.target == modal) {
+              modal.style.display = "none";
+            }
+          }
+        });
+      }
+    });
 
 
     /* this.map.on('click', 'points', (e) => {
