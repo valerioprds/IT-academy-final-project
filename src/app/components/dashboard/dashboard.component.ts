@@ -10,6 +10,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,7 +48,8 @@ export class DashboardComponent implements OnInit {
     private mapService: MapService,
     private dialogRef: MatDialog,
     private observer: BreakpointObserver,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private sharedService: SharedService
   ) {}
 
   getUserVerification() {
@@ -61,18 +63,23 @@ export class DashboardComponent implements OnInit {
     });
   }
   ngOnInit(): void {
-    // this.getUserVerification();
     this.initializeMap();
+
+    this.sharedService.showDialog$.subscribe(() => {
+        this.openDialogWithRating();
+    });
+
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        this.userCurrentLocation = new mapboxgl.LngLat(
-          position.coords.longitude,
-          position.coords.latitude
-        );
-        this.directions.setOrigin(this.userCurrentLocation.toArray());
-      });
+        navigator.geolocation.getCurrentPosition((position) => {
+            this.userCurrentLocation = new mapboxgl.LngLat(
+                position.coords.longitude,
+                position.coords.latitude
+            );
+            this.directions.setOrigin(this.userCurrentLocation.toArray());
+        });
     }
-  }
+}
+
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width:800px)']).subscribe((res) => {
@@ -157,7 +164,7 @@ export class DashboardComponent implements OnInit {
     }
 
     // Add event listener for when a point is clicked
-    /* this.map.on('click', 'points', (e) => {
+     this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
       if (e.features!.length) {
         console.log(e.features!);
@@ -172,11 +179,11 @@ export class DashboardComponent implements OnInit {
           .addTo(this.map);
         console.log('from pop up   ' + feature.properties);
       }
-    }); */
+    });
 
 
 
-    this.map.on('click', 'points', (e) => {
+    /* this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
       if (e.features!.length) {
         console.log(e.features!);
@@ -206,7 +213,7 @@ export class DashboardComponent implements OnInit {
           });
         }
       }
-    });
+    }); */
 
 
 
@@ -251,6 +258,23 @@ export class DashboardComponent implements OnInit {
 
     return nearestToilet;
   }
+
+  openDialogWithRating() {
+    const dialogRef = this.dialogRef.open(AddLocationComponent, {
+      width: '500px',
+      height: '400px',
+      data: { isRating: true } // Send data to know it's for rating
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'added') {
+        this.initializeMap();
+        this.getToilets();
+      }
+      // Add logic to handle when rating is updated if needed
+    });
+}
+
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
