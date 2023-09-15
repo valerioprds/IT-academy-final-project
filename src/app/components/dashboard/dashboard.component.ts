@@ -10,7 +10,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { SharedService } from 'src/app/services/shared.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -49,7 +48,6 @@ export class DashboardComponent implements OnInit {
     private dialogRef: MatDialog,
     private observer: BreakpointObserver,
     private cdRef: ChangeDetectorRef,
-    private sharedService: SharedService
   ) {}
 
   getUserVerification() {
@@ -65,9 +63,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initializeMap();
 
-    this.sharedService.showDialog$.subscribe(() => {
-        this.openDialogWithRating();
-    });
+
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition((position) => {

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 //modules
@@ -13,6 +13,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 //components
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { RatingComponent } from './components/rating/rating.component';
 
 @NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   declarations: [
     AppComponent,
     LoginComponent,
@@ -38,6 +40,7 @@ import { RatingComponent } from './components/rating/rating.component';
     SpinnerComponent,
     AddLocationComponent,
     RatingComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -53,6 +56,7 @@ import { RatingComponent } from './components/rating/rating.component';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
+    AngularFireAuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
