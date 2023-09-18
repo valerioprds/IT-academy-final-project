@@ -47,7 +47,7 @@ export class DashboardComponent implements OnInit {
     private mapService: MapService,
     private dialogRef: MatDialog,
     private observer: BreakpointObserver,
-    private cdRef: ChangeDetectorRef,
+    private cdRef: ChangeDetectorRef
   ) {}
 
   getUserVerification() {
@@ -63,19 +63,18 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initializeMap();
 
-
+    // this.getUserVerification();
 
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            this.userCurrentLocation = new mapboxgl.LngLat(
-                position.coords.longitude,
-                position.coords.latitude
-            );
-            this.directions.setOrigin(this.userCurrentLocation.toArray());
-        });
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.userCurrentLocation = new mapboxgl.LngLat(
+          position.coords.longitude,
+          position.coords.latitude
+        );
+        this.directions.setOrigin(this.userCurrentLocation.toArray());
+      });
     }
-}
-
+  }
 
   ngAfterViewInit() {
     this.observer.observe(['(max-width:800px)']).subscribe((res) => {
@@ -159,24 +158,6 @@ export class DashboardComponent implements OnInit {
       });
     }
 
-    // Add event listener for when a point is clicked
-   /*   this.map.on('click', 'points', (e) => {
-      console.log('hello from on click ');
-      if (e.features!.length) {
-        console.log(e.features!);
-        const feature = e.features![0];
-        const popup = new mapboxgl.Popup({ offset: 25 }) // add popup offset
-          .setLngLat(e.lngLat)
-          .setHTML(
-            '<p class="popup" style="font-size: 16px; color: black"> <strong>Address:</strong>' +
-              feature.properties!['location'] +
-              ' <button>My Button</button></p> '
-          )
-          .addTo(this.map);
-        console.log('from pop up   ' + feature.properties);
-      }
-    }); */
-
     this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
       if (e.features && e.features.length) {
@@ -184,32 +165,35 @@ export class DashboardComponent implements OnInit {
         const feature = e.features[0];
         const popup = new mapboxgl.Popup({ offset: 25 })
           .setLngLat(e.lngLat)
-          .setHTML(`
+          .setHTML(
+            `
           <p class="popup" style="font-size: 16px; color: black">
             <strong>Dirección:</strong>${feature.properties['location']}
             <button id="rate-button">Calificar</button>
           </p>
-          `)
+          `
+          )
           .addTo(this.map);
-        console.log('from pop up   ' + feature.properties);
+        console.log('from pop up   ' + feature.properties['toiletId']);
 
         // Open the modal when 'rate-button' is clicked
-        document.getElementById('rate-button').addEventListener('click', function() {
-          const modal = document.getElementById('myModal');
-          modal.style.display = "block";
-          const closeBtn = document.querySelector('.close') as HTMLElement;
-          closeBtn.onclick = function() {
-            modal.style.display = "none";
-          }
-          window.onclick = function(event) {
-            if (event.target == modal) {
-              modal.style.display = "none";
-            }
-          }
-        });
+        document
+          .getElementById('rate-button')
+          .addEventListener('click', function () {
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+            const closeBtn = document.querySelector('.close') as HTMLElement;
+            closeBtn.onclick = function () {
+              modal.style.display = 'none';
+            };
+            window.onclick = function (event) {
+              if (event.target == modal) {
+                modal.style.display = 'none';
+              }
+            };
+          });
       }
     });
-
 
     /* this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
@@ -242,9 +226,6 @@ export class DashboardComponent implements OnInit {
         }
       }
     }); */
-
-
-
 
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
@@ -291,7 +272,7 @@ export class DashboardComponent implements OnInit {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
       width: '500px',
       height: '400px',
-      data: { isRating: true } // Send data to know it's for rating
+      data: { isRating: true }, // Send data to know it's for rating
     });
 
     dialogRef.afterClosed().subscribe((result) => {
@@ -301,8 +282,7 @@ export class DashboardComponent implements OnInit {
       }
       // Add logic to handle when rating is updated if needed
     });
-}
-
+  }
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
