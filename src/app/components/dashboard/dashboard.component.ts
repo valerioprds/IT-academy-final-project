@@ -298,23 +298,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  async getRating() {
-    this.ratingCount++;
-    this.totalRating += this.ratingControl.value || 0;
-    this.finalRating = (this.totalRating / this.ratingCount).toFixed(2);
-
-    // Assuming you have the toiletId available in this component
-    try {
-      await this.mapService.updateRating(
-        this.toiletId,
-        this.ratingControl.value
-      );
-    } catch (err) {
-      console.error('Failed to update rating:', err);
-      // Handle the error appropriately, such as displaying a message to the user
-    }
-  }
-
+ 
   LogOut() {
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/login']);

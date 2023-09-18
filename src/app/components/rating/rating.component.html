@@ -1,1 +1,38 @@
 <h1>Input Rating</h1>
+
+<div class="rating-container">
+  <!-- Display Star Rating for User Input -->
+  <div class="user-rating">
+    <i
+      class="fa fa-star"
+      [class.selected]="selectedRating >= 1"
+      (click)="selectRating(1)"
+    ></i>
+    <i
+      class="fa fa-star"
+      [class.selected]="selectedRating >= 2"
+      (click)="selectRating(2)"
+    ></i>
+    <i
+      class="fa fa-star"
+      [class.selected]="selectedRating >= 3"
+      (click)="selectRating(3)"
+    ></i>
+    <i
+      class="fa fa-star"
+      [class.selected]="selectedRating >= 4"
+      (click)="selectRating(4)"
+    ></i>
+    <i
+      class="fa fa-star"
+      [class.selected]="selectedRating >= 5"
+      (click)="selectRating(5)"
+    ></i>
+    <button (click)="submitRating()">Submit Rating</button>
+  </div>
+
+  <!-- Display Average Rating -->
+  <div class="average-rating">
+    <span>Average Rating: </span><strong>{{ averageRating }}</strong>
+  </div>
+</div>

@@ -38,13 +38,28 @@ export class MapService {
     }));
   }
 
-  async updateRating(toiletId: string, newRating: number) {
-    const data = {
-      rating: newRating,
-    };
-    const res: any = await this.http
-      .post(`http://localhost:5000/api/v1/toilets/${toiletId}/rate`, data)
-      .toPromise();
-    return res.data;
+  // added on 18/09
+  async rateToilet(toiletId: string, userRating: number) {
+    const endpoint = 'http://localhost:5000/api/v1/toilets';
+    const payload = { toiletId, userRating };
+
+    try {
+      const response = await this.http.post(endpoint, payload).toPromise();
+      return response;
+    } catch (error) {
+      throw new Error('Failed to rate the toilet. Please try again later.222222');
+    }
   }
+
+
+  async getToiletDetails(toiletId: string) {
+    const endpoint = `http://localhost:5000/api/v1/toilets`;
+    try {
+      const response: any = await this.http.get(endpoint).toPromise();
+      return response.data;  // Assuming the toilet data is wrapped in a "data" property in the response
+    } catch (error) {
+      throw new Error('Failed to fetch toilet details.');
+    }
+  }
+
 }
