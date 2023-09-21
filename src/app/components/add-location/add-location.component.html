@@ -34,25 +34,9 @@
         <strong>6 characters</strong></span
       >
     </div>
-    <div class="form-group mx-3">
-      <label for="address">Toilet address</label>
-      <input
-        type="text"
-        id="address"
-        class="form-control"
-        formControlName="address"
-        placeholder="Example: Gran Via, 33"
-      />
-      <span
-        *ngIf="
-          toiletForm.get('address')?.hasError('required') &&
-          toiletForm.get('address')?.touched
-        "
-        class="text-danger error-label"
-      >
-        Address is <strong>required</strong></span
-      >
-    </div>
+
+    <input type="text" value="">
+
 
     <span
       *ngIf="

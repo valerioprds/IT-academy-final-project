@@ -10,6 +10,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -47,7 +48,8 @@ export class DashboardComponent implements OnInit {
     private mapService: MapService,
     private dialogRef: MatDialog,
     private observer: BreakpointObserver,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    private http: HttpClient
   ) {}
 
   getUserVerification() {
@@ -116,6 +118,11 @@ export class DashboardComponent implements OnInit {
     });
     this.map.addControl(this.directions, 'top-left');
 
+    this.map.on('click', (e) => {
+      this.showAddLocationDialog(e.lngLat);
+
+    });
+
     this.map.on('load', async () => {
       const toilets = await this.getToilets();
       this.loadMapData(toilets);
@@ -134,6 +141,38 @@ export class DashboardComponent implements OnInit {
   async getToilets() {
     return await this.mapService.getToilets(); // return the toilets
   }
+
+  showAddLocationDialog(lngLat: mapboxgl.LngLat) {
+    console.log('hello from showAddLocationDialog', lngLat);
+    const dialogRef = this.dialogRef.open(AddLocationComponent, {
+      width: '500px',
+      height: '400px',
+      data: { lngLat: lngLat }, // Pass the clicked coordinates to the dialog
+    });
+
+    //this.saveCoordinatesToAPI(lngLat);
+  }
+
+  /* saveCoordinatesToAPI(lngLat: mapboxgl.LngLat) {
+    console.log('hello from  saveCoordinatesToAPI');
+    const data = {
+      longitude: lngLat.lng,
+      latitude: lngLat.lat,
+      // Add any other required fields
+    };
+
+    // Make an HTTP POST request to save the coordinates
+    this.http.post('http://localhost:5000/api/v1/toilets', data).subscribe(
+      (response) => {
+        console.log('Location saved successfully:', response);
+        // You can also refresh the map or show a success message to the user
+      },
+      (error) => {
+        console.error('Error saving location:', error);
+        // Handle the error, maybe show an error message to the user
+      }
+    );
+  } */
 
   loadMapData(toilets: any = []) {
     if (!this.map.getLayer('points')) {
@@ -157,7 +196,7 @@ export class DashboardComponent implements OnInit {
         },
       });
     }
-
+    /* ************POPUP*************** */
     this.map.on('click', 'points', (e) => {
       console.log('hello from on click ');
       if (e.features && e.features.length) {
@@ -275,13 +314,13 @@ export class DashboardComponent implements OnInit {
       data: { isRating: true }, // Send data to know it's for rating
     });
 
-    dialogRef.afterClosed().subscribe((result) => {
+    /*  dialogRef.afterClosed().subscribe((result) => {
       if (result === 'added') {
         this.initializeMap();
         this.getToilets();
       }
       // Add logic to handle when rating is updated if needed
-    });
+    }); */
   }
 
   openDialog() {
@@ -298,7 +337,6 @@ export class DashboardComponent implements OnInit {
     });
   }
 
- 
   LogOut() {
     this.afAuth.signOut().then(() => {
       this.router.navigate(['/login']);

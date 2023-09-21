@@ -20,7 +20,7 @@ export class RatingComponent implements OnInit {
     this.selectedRating = rating;
   }
 
-  async submitRating() {
+ /*  async submitRating() {
     if (this.selectedRating > 0) {
       try {
         const toiletId = this.toiletId; // This should be dynamically set based on the toilet you're rating.
@@ -40,5 +40,5 @@ export class RatingComponent implements OnInit {
         alert('Error submitting your rating. Please try again later.1111111111111');
       }
     }
-  }
+  } */
 }

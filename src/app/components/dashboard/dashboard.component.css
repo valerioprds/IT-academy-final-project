@@ -1,3 +1,8 @@
+body {
+  font-family: 'Skranji', cursive;
+}
+
+
 .map-container {
   position: relative;
   width: 100%;
@@ -76,18 +81,43 @@
 /* end of css effects on logout button */
 
 .mat-toolbar {
-  background-color: navy;
-  color: white;
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to left,
+    #6dd5ed,
+    #2193b0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to left,
+    #6dd5ed,
+    #2193b0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.menu-icon {
+  color: #000;
 }
 
 .mat-sidenav {
   margin: 16px;
   width: 200px;
   border-right: none;
-  background: #002bc5;
   border-radius: 10px;
   padding: 16px;
   text-align: center;
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #6dd5ed,
+    #2193b0
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #6dd5ed,
+    #2193b0
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 }
 
 .mat-sidenav-container {
@@ -152,15 +182,17 @@ mat-divider {
 }
 
 /* beginning of styles for modal */
+@import "~mapbox-gl/dist/mapbox-gl.css";
 
 .modal {
   display: none;
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {

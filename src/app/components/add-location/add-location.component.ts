@@ -12,7 +12,6 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class AddLocationComponent implements OnInit {
   toiletForm!: FormGroup;
- // toiledIdforChildComponent = '';
 
   constructor(
     private fb: FormBuilder,
@@ -24,14 +23,17 @@ export class AddLocationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(this.data);
     this.toiletForm = this.fb.group({
       toiletId: ['', [Validators.required, Validators.minLength(6)]],
-      address: ['', [Validators.required, Validators.minLength(6)]],
-      rating: ['',],
+      //tengo que añadir input y parle longitud y latitud
+      //address: ['', [Validators.required, Validators.minLength(6)]],
+      //rating: [''],
     });
   }
 
   async onSubmit() {
+    console.log('hello from onsubmit');
     const header = new HttpHeaders({ contentType: 'application/json' });
     const toiletIdValue = this.toiletForm.get('toiletId')!.value;
 
@@ -44,20 +46,22 @@ export class AddLocationComponent implements OnInit {
           .toPromise();
 
         if (response) {
-          this.toastr.success(`${toiletIdValue} has been added successfully`, 'Success');
+          this.toastr.success(
+            `has been added successfully`,
+            `${toiletIdValue}`
+          );
           this.router.navigate(['/dashboard']);
         }
       } catch (error: any) {
         if (error.status === 400) {
-          this.toastr.error(`${toiletIdValue} already exists`, 'Error');
+          this.toastr.error(`already exists`, `${toiletIdValue}`);
         } else {
           alert(error.message);
         }
       }
     }
-    this.dialogRef.close('added')
+    this.dialogRef.close('added');
   }
-
 
   onCancel() {
     this.dialogRef.close('canceled');

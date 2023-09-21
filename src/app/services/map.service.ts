@@ -39,7 +39,7 @@ export class MapService {
   }
 
   // added on 18/09
-  async rateToilet(toiletId: string, userRating: number) {
+ /*  async rateToilet(toiletId: string, userRating: number) {
     const endpoint = 'http://localhost:5000/api/v1/toilets';
     const payload = { toiletId, userRating };
 
@@ -60,6 +60,6 @@ export class MapService {
     } catch (error) {
       throw new Error('Failed to fetch toilet details.');
     }
-  }
+  } */
 
 }

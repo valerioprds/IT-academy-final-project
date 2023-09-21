@@ -11,8 +11,8 @@
     *ngIf="sidenav.mode === 'over'"
     (click)="sidenav.toggle()"
   >
-    <mat-icon *ngIf="!sidenav.opened">menu</mat-icon>
-    <mat-icon *ngIf="sidenav.opened">close</mat-icon>
+    <mat-icon class="menu-icon" *ngIf="!sidenav.opened">menu</mat-icon>
+    <mat-icon class="menu-icon" *ngIf="sidenav.opened">close</mat-icon>
   </button>
   Responsive sidebar navigation
   <!-- {{dataUser._delegate.email}} -->
@@ -26,10 +26,9 @@
     <!-- buttons  -->
 
     <mat-divider></mat-divider>
-    <!-- & need to add routerlink function to buttons -->
-    <button mat-button class="menu-button" (click)="openDialog()">
+    <!-- <button mat-button class="menu-button" (click)="openDialog()">
       <mat-icon> add_location</mat-icon> <span>Add a new Toilet</span>
-    </button>
+    </button> -->
     <button
       mat-button
       class="menu-button emergency-button"
@@ -66,12 +65,9 @@
   <mat-sidenav-content>
     <div class="content mat-elevation-z4">
       <div id="map" class="map-container"></div>
-
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
-
-
 
 <div id="myModal" class="modal">
   <div class="modal-content">
