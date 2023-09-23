@@ -21,25 +21,31 @@ export class MapService {
     const res: any = await this.http
       .get('http://localhost:5000/api/v1/toilets')
       .toPromise();
-    return res.data.map((toilet: any) => ({
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [
-          toilet.location.coordinates[0],
-          toilet.location.coordinates[1],
-        ],
-      },
-      properties: {
-        toiletId: toilet.toiletId,
-        icon: 'toilet',
-        location: toilet.location.formattedAddress,
-      },
-    }));
+    return res.data
+      .filter(
+        (toilet: any) =>
+          toilet?.location?.coordinates != null &&
+          toilet.location.coordinates.length == 2
+      )
+      .map((toilet: any) => ({
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          coordinates: [
+            toilet.location.coordinates[0],
+            toilet.location.coordinates[1],
+          ],
+        },
+        properties: {
+          toiletId: toilet.toiletId,
+          icon: 'toilet',
+          location: toilet.location.formattedAddress,
+        },
+      }));
   }
 
   // added on 18/09
- /*  async rateToilet(toiletId: string, userRating: number) {
+  /*  async rateToilet(toiletId: string, userRating: number) {
     const endpoint = 'http://localhost:5000/api/v1/toilets';
     const payload = { toiletId, userRating };
 
@@ -61,5 +67,4 @@ export class MapService {
       throw new Error('Failed to fetch toilet details.');
     }
   } */
-
 }

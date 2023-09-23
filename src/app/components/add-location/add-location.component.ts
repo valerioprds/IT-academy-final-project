@@ -40,10 +40,16 @@ export class AddLocationComponent implements OnInit {
     if (this.toiletForm.valid) {
       try {
         const response = await this.http
-          .post('http://localhost:5000/api/v1/toilets', this.toiletForm.value, {
-            headers: header,
-          })
-          .toPromise();
+        .post('http://localhost:5000/api/v1/toilets', {
+          toiletId: toiletIdValue,
+          location: {
+            type: 'Point',
+            coordinates: [this.data.lngLat.lng, this.data.lngLat.lat]
+          }
+        }, {
+          headers: header,
+        })
+        .toPromise();
 
         if (response) {
           this.toastr.success(
