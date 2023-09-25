@@ -30,6 +30,9 @@ export class DashboardComponent implements OnInit {
     this.lat
   ); // User's initial location
 
+  currentToiletId: string; // Declare it here
+
+
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
@@ -217,44 +220,7 @@ export class DashboardComponent implements OnInit {
       }
     });
 
-    /*    this.map.on('click', 'points', (e) => {
-      console.log('hello from on click popup');
-      if (e.features && e.features.length) {
-        console.log(e.features);
-        const feature = e.features[0];
-        const popup = new mapboxgl.Popup({ offset: 25 })
-          .setLngLat(e.lngLat)
-          .setHTML(
-            `
-          <p class="popup" style="font-size: 16px; color: black">
-            <strong>${feature.properties['toiletId']}</strong><br>
-            <button id="rate-button">Calificar</button>
-          </p>
-          `
-          )
-          .addTo(this.map);
-        console.log('from pop up   ' + feature.properties['toiletId']);
-
-        // Open the modal when 'rate-button' is clicked
-        document
-          .getElementById('rate-button')
-          .addEventListener('click', function () {
-            console.log('opening my modal for rating' , feature.properties['toiletId'])
-            const modal = document.getElementById('myModal');
-            modal.style.display = 'block';
-            const closeBtn = document.querySelector('.close') as HTMLElement;
-            closeBtn.onclick = function () {
-              modal.style.display = 'none';
-            };
-            window.onclick = function (event) {
-              if (event.target == modal) {
-                modal.style.display = 'none';
-              }
-            };
-          });
-      }
-    });
- */
+    
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });

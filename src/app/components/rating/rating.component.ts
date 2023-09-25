@@ -12,7 +12,9 @@ export class RatingComponent implements OnInit {
   @Input() toiletId: string;
 
   constructor(private http: HttpClient) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('Received toiletId:', this.toiletId);
+  }
 
   postRating(toiletId: string, userRating: number) {
     const payload = {
@@ -20,7 +22,7 @@ export class RatingComponent implements OnInit {
       userRating,
     };
 
-    console.log(payload)  //toiletId is undefined 
+    console.log(payload); //toiletId is undefined
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -40,25 +42,5 @@ export class RatingComponent implements OnInit {
       );
   }
 
-  /*  async submitRating() {
-    if (this.selectedRating > 0) {
-      try {
-        const toiletId = this.toiletId; // This should be dynamically set based on the toilet you're rating.
-        await this.mapService.rateToilet(toiletId, this.selectedRating);
-        const updatedToilet = await this.mapService.getToiletDetails(
-          this.toiletId
-        ); // Assuming you have a method to get individual toilet details
-
-        //calcolare average  rating
-        if (updatedToilet.ratingCount > 0) {
-          this.averageRating =
-            updatedToilet.ratingScore / updatedToilet.ratingCount;
-        }
-
-        alert('Thank you for your rating!');
-      } catch (error) {
-        alert('Error submitting your rating. Please try again later.1111111111111');
-      }
-    }
-  } */
+ 
 }
