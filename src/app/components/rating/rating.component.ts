@@ -20,6 +20,8 @@ export class RatingComponent implements OnInit {
       userRating,
     };
 
+    console.log(payload)  //toiletId is undefined 
+
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
     });

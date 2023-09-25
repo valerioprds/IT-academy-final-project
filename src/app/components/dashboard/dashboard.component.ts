@@ -30,17 +30,9 @@ export class DashboardComponent implements OnInit {
     this.lat
   ); // User's initial location
 
-  ratingCount = 0;
-  totalRating = 0;
-
-  finalRating: any;
-
-  ratingControl = new FormControl(0);
-
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
-  @Input() toiletId: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -77,7 +69,7 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
-
+  //sidenav responsive
   ngAfterViewInit() {
     this.observer.observe(['(max-width:800px)']).subscribe((res) => {
       if (res.matches) {
@@ -179,7 +171,53 @@ export class DashboardComponent implements OnInit {
       });
     }
     /* ************POPUP*************** */
+
+    let currentToiletId; // Declare a variable to hold the toiletId
+
     this.map.on('click', 'points', (e) => {
+      console.log('hello from on click popup');
+      if (e.features && e.features.length) {
+        console.log(e.features);
+        const feature = e.features[0];
+        currentToiletId = feature.properties['toiletId']; // Assign the toiletId value to the variable
+
+        const popup = new mapboxgl.Popup({ offset: 25 })
+          .setLngLat(e.lngLat)
+          .setHTML(
+            `
+          <p class="popup" style="font-size: 16px; color: black">
+            <strong>${currentToiletId}</strong><br>
+            <button id="rate-button">Calificar</button>
+          </p>
+          `
+          )
+          .addTo(this.map);
+        console.log('from pop up   ' + currentToiletId);
+
+        // Open the modal when 'rate-button' is clicked
+        document
+          .getElementById('rate-button')
+          .addEventListener('click', function () {
+            console.log('opening my modal for rating');
+            console.log('Current Toilet ID:', currentToiletId); // Use the toiletId here
+
+            const modal = document.getElementById('myModal');
+            modal.style.display = 'block';
+            const closeBtn = document.querySelector('.close') as HTMLElement;
+            closeBtn.onclick = function () {
+              modal.style.display = 'none';
+            };
+            window.onclick = function (event) {
+              if (event.target == modal) {
+                modal.style.display = 'none';
+              }
+            };
+          });
+       ;
+      }
+    });
+
+    /*    this.map.on('click', 'points', (e) => {
       console.log('hello from on click popup');
       if (e.features && e.features.length) {
         console.log(e.features);
@@ -201,6 +239,7 @@ export class DashboardComponent implements OnInit {
         document
           .getElementById('rate-button')
           .addEventListener('click', function () {
+            console.log('opening my modal for rating' , feature.properties['toiletId'])
             const modal = document.getElementById('myModal');
             modal.style.display = 'block';
             const closeBtn = document.querySelector('.close') as HTMLElement;
@@ -215,7 +254,7 @@ export class DashboardComponent implements OnInit {
           });
       }
     });
-
+ */
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
     });
