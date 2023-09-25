@@ -1,3 +1,4 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MapService } from 'src/app/services/map.service';
@@ -10,17 +11,34 @@ import { MapService } from 'src/app/services/map.service';
 export class RatingComponent implements OnInit {
   @Input() toiletId: string;
 
-  selectedRating: number = 0;
-  averageRating: number = 0; // Example initial value. Ideally, this should be fetched from your backend.
-
-  constructor(private mapService: MapService) {}
+  constructor(private http: HttpClient) {}
   ngOnInit(): void {}
 
-  selectRating(rating: number) {
-    this.selectedRating = rating;
+  postRating(toiletId: string, userRating: number) {
+    const payload = {
+      toiletId,
+      userRating,
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    this.http
+      .post('http://localhost:5000/api/v1/toilets/rateToilet', payload, {
+        headers,
+      })
+      .subscribe(
+        (res) => {
+          console.log('Rating posted successfully:', res);
+        },
+        (err) => {
+          console.error('Failed to post rating:', err);
+        }
+      );
   }
 
- /*  async submitRating() {
+  /*  async submitRating() {
     if (this.selectedRating > 0) {
       try {
         const toiletId = this.toiletId; // This should be dynamically set based on the toilet you're rating.
