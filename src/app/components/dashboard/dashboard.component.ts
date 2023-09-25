@@ -120,7 +120,6 @@ export class DashboardComponent implements OnInit {
 
     this.map.on('click', (e) => {
       this.showAddLocationDialog(e.lngLat);
-
     });
 
     this.map.on('load', async () => {
@@ -150,29 +149,13 @@ export class DashboardComponent implements OnInit {
       data: { lngLat: lngLat }, // Pass the clicked coordinates to the dialog
     });
 
-    //this.saveCoordinatesToAPI(lngLat);
-  }
-
-  /* saveCoordinatesToAPI(lngLat: mapboxgl.LngLat) {
-    console.log('hello from  saveCoordinatesToAPI');
-    const data = {
-      longitude: lngLat.lng,
-      latitude: lngLat.lat,
-      // Add any other required fields
-    };
-
-    // Make an HTTP POST request to save the coordinates
-    this.http.post('http://localhost:5000/api/v1/toilets', data).subscribe(
-      (response) => {
-        console.log('Location saved successfully:', response);
-        // You can also refresh the map or show a success message to the user
-      },
-      (error) => {
-        console.error('Error saving location:', error);
-        // Handle the error, maybe show an error message to the user
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result === 'added') {
+        this.initializeMap();
+        this.getToilets();
       }
-    );
-  } */
+    });
+  }
 
   loadMapData(toilets: any = []) {
     if (!this.map.getLayer('points')) {
@@ -198,7 +181,7 @@ export class DashboardComponent implements OnInit {
     }
     /* ************POPUP*************** */
     this.map.on('click', 'points', (e) => {
-      console.log('hello from on click ');
+      console.log('hello from on click popup');
       if (e.features && e.features.length) {
         console.log(e.features);
         const feature = e.features[0];
@@ -207,7 +190,7 @@ export class DashboardComponent implements OnInit {
           .setHTML(
             `
           <p class="popup" style="font-size: 16px; color: black">
-            <strong>Dirección:</strong>${feature.properties['location']}
+            <strong>${feature.properties['toiletId']}</strong><br>
             <button id="rate-button">Calificar</button>
           </p>
           `
@@ -233,38 +216,6 @@ export class DashboardComponent implements OnInit {
           });
       }
     });
-
-    /* this.map.on('click', 'points', (e) => {
-      console.log('hello from on click ');
-      if (e.features!.length) {
-        console.log(e.features!);
-        const feature = e.features![0];
-        const popupContent = `
-          <p class="popup" style="font-size: 16px; color: black">
-            <strong>Address:</strong>${feature.properties!['location']}
-            <div id="rating-stars">
-              <!-- Here you'll represent the rating with stars (e.g., ★★★☆☆) -->
-              ${Array(5).fill('☆').map((star, index) =>
-                  index < feature.properties!['rating'] ? '★' : star).join('')}
-            </div>
-            <button id="rate-button">Rate</button>
-          </p>
-        `;
-        const popup = new mapboxgl.Popup({ offset: 25 })
-          .setLngLat(e.lngLat)
-          .setHTML(popupContent)
-          .addTo(this.map);
-        const rateButton = document.getElementById('rate-button');
-        if (rateButton) {
-          rateButton.addEventListener('click', () => {
-            // Handle the rating logic here,
-            // maybe opening a modal where users can select the rating
-            '<button mat-button (click)="openDialog()">Open Dialog</button>'
-
-          });
-        }
-      }
-    }); */
 
     this.map.on('mouseenter', 'points', () => {
       this.map.getCanvas().style.cursor = 'pointer';
@@ -307,21 +258,21 @@ export class DashboardComponent implements OnInit {
     return nearestToilet;
   }
 
-  openDialogWithRating() {
+  /*   openDialogWithRating() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
       width: '500px',
       height: '400px',
       data: { isRating: true }, // Send data to know it's for rating
     });
 
-    /*  dialogRef.afterClosed().subscribe((result) => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result === 'added') {
         this.initializeMap();
         this.getToilets();
       }
       // Add logic to handle when rating is updated if needed
-    }); */
-  }
+    });
+  } */
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
