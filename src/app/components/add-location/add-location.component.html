@@ -35,9 +35,6 @@
       >
     </div>
 
-    <input type="text" value="">
-
-
     <span
       *ngIf="
         toiletForm.get('address')?.hasError('minlength') &&
@@ -48,7 +45,6 @@
       Address must have a least <strong>6 digits</strong></span
     >
     <div class="m-3">
-
       <button
         type="submit"
         class="btn btn-primary"
