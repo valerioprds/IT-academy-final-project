@@ -5,5 +5,5 @@
   <button (click)="postRating(toiletId, 3)">3</button>
   <button (click)="postRating(toiletId, 4)">4</button>
   <button (click)="postRating(toiletId, 5)">5</button>
-  <p>Average Rating :{{averageRating}} </p>
+  <p>Average Rating:<i class="fa-solid fa-star" style="color: #ffdd00;"></i> {{ getAverageRating(toiletId) }}</p>
 </div>
