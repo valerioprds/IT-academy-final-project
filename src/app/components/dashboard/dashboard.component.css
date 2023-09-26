@@ -1,7 +1,12 @@
 body {
-  font-family: 'Skranji', cursive;
+  font-family: "Skranji", cursive;
 }
 
+.font-title {
+  font-family: "Black Ops One", cursive;
+  font-size: 38px;
+  color: #000000;
+}
 
 .map-container {
   position: relative;
@@ -117,7 +122,6 @@ body {
     #6dd5ed,
     #2193b0
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
 }
 
 .mat-sidenav-container {

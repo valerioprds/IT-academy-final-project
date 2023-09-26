@@ -5,7 +5,7 @@
 />
 <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-directions/v4.1.1/mapbox-gl-directions.js"></script>
 
-<mat-toolbar>
+<mat-toolbar class="font-title">
   <button
     mat-icon-button
     *ngIf="sidenav.mode === 'over'"
@@ -14,7 +14,7 @@
     <mat-icon class="menu-icon" *ngIf="!sidenav.opened">menu</mat-icon>
     <mat-icon class="menu-icon" *ngIf="sidenav.opened">close</mat-icon>
   </button>
-  Responsive sidebar navigation
+  WeeMap
   <!-- {{dataUser._delegate.email}} -->
 </mat-toolbar>
 <mat-sidenav-container>
