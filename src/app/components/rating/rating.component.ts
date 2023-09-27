@@ -55,44 +55,8 @@ export class RatingComponent implements OnInit {
     );
   }
 
-
   getAverageRating(toiletId: string): number {
     const toiletRating = this.toiletRatingsMap.get(toiletId);
     return toiletRating ? toiletRating.averageRating : 0;
   }
-
-
-  /* postRating(toiletId: string, userRating: number) {
-    // Update the total sum and count of ratings
-    this.totalRatingSum += userRating;
-    this.totalRatingCount++;
-
-    // Calculate the average rating
-    this.averageRating = this.totalRatingSum / this.totalRatingCount;
-
-    const payload = {
-      toiletId,
-      userRating,
-    };
-
-    console.log(payload);
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    this.http
-      .post('http://localhost:5000/api/v1/toilets/rateToilet', payload, {
-        headers,
-      })
-      .subscribe(
-        (res) => {
-          this.toastr.success('Rating posted successfully:');
-          console.log('Average Rating:', this.averageRating); // Log the average rating
-        },
-        (err) => {
-          this.toastr.error('Failed to post rating:', err);
-        }
-      );
-  } */
 }
