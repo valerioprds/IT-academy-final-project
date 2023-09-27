@@ -12,11 +12,6 @@ import { ToastrService } from 'ngx-toastr';
 export class RatingComponent implements OnInit {
   @Input() toiletId: string;
 
-  // Variables to keep track of the total sum and count of ratings
-  totalRatingSum: number = 0;
-  totalRatingCount: number = 0;
-  averageRating: number = 0;
-
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
