@@ -40,6 +40,7 @@ export class MapService {
           toiletId: toilet.toiletId,
           icon: 'toilet',
           location: toilet.location.formattedAddress,
+          rating: toilet.ratings//calculo para guardar media 
         },
       }));
   }

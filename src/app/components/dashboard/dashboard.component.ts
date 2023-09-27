@@ -116,6 +116,8 @@ export class DashboardComponent implements OnInit {
 
     this.map.on('load', async () => {
       const toilets = await this.getToilets();
+      console.log('from initializeMap ', toilets);
+
       this.loadMapData(toilets);
 
       if (navigator.geolocation) {

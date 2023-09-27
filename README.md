@@ -14,10 +14,12 @@ themplates :
 https://colorlib.com/wp/template/login-form-v1/
 
 
-### preguntas para Isma:
-- como puedo hacer para que no tenga que acitvar manualmente la base de datos?
-- input y output no se donde ponerlos
-- añadir section para commentatio u otra cosa para user interaction 
+### 
+guarda media  en servicio y mostrtarlo en el evento antes de poder votar 
+solucionar problema marcador 
+actualizar media que ya he creado antes y que tengo guardado en variable toilets 
+
+
 
 
 
