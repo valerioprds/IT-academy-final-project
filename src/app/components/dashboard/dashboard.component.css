@@ -1,3 +1,7 @@
+.content {
+  position: relative;
+}
+
 body {
   font-family: "Skranji", cursive;
 }
@@ -9,7 +13,7 @@ body {
 }
 
 .map-container {
-  position: relative;
+  /*  position: relative; */
   width: 100%;
   height: 100%;
   z-index: 50;
@@ -222,3 +226,30 @@ mat-divider {
 }
 
 /* end of styles of modal  */
+
+.emergency-toilet {
+  position: absolute;
+  top: 29rem;
+  right: 66rem;
+  z-index: 500;
+  border-radius: 50px;
+}
+.fa-solid {
+  font-size: 2rem;
+}
+
+
+
+
+@media only screen
+   and (min-width : 320px) {
+    .emergency-toilet {
+      position: absolute;
+      top: 29rem;
+      right: 66rem;
+      z-index: 500;
+      border-radius: 50px;
+    }
+    .fa-solid {
+      font-size: 2rem;
+    }}

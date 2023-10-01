@@ -30,6 +30,8 @@ export class DashboardComponent implements OnInit {
     this.lat
   ); // User's initial location
 
+  isButtonVisible = true;
+
   currentToiletId: any;
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
@@ -235,6 +237,8 @@ export class DashboardComponent implements OnInit {
       );
       this.directions.setDestination(destination.toArray());
     }
+
+    this.isButtonVisible = false;
   }
 
   findNearestToilet(toilets: any[]): any {
