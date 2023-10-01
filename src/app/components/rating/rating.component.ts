@@ -12,29 +12,17 @@ import { ToastrService } from 'ngx-toastr';
 export class RatingComponent implements OnInit {
   @Input() toiletId: string;
 
-  // Variables to keep track of the total sum and count of ratings
-  totalRatingSum: number = 0;
-  totalRatingCount: number = 0;
-  averageRating: number = 0;
+  displayedAverageRating: number;
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   ngOnInit(): void {}
 
   postRating(toiletId: string, userRating: number) {
-    // Update the total sum and count of ratings
-    this.totalRatingSum += userRating;
-    this.totalRatingCount++;
-
-    // Calculate the average rating
-    this.averageRating = this.totalRatingSum / this.totalRatingCount;
-
     const payload = {
       toiletId,
       userRating,
     };
-
-    console.log(payload);
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -45,9 +33,10 @@ export class RatingComponent implements OnInit {
         headers,
       })
       .subscribe(
-        (res) => {
-          this.toastr.success('Rating posted successfully:');
-          console.log('Average Rating:', this.averageRating); // Log the average rating
+        (res: any) => {
+          this.toastr.success('Rating posted successfully');
+          console.log('Average Rating from backend:', res.averageRating); // Log the average rating from backend
+          this.displayedAverageRating = res.averageRating;
         },
         (err) => {
           this.toastr.error('Failed to post rating:', err);
