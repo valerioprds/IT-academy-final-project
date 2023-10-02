@@ -1,22 +1,23 @@
-<!-- Assuming you have a star rating component -->
-<div class="star-rating">
-  <a (click)="postRating(toiletId, 1)">
-    <i class="fa-regular fa-face-angry" style="color: #da1010"></i>
-  </a>
-  <a (click)="postRating(toiletId, 2)" class="ms-2">
-    <i class="fa-regular fa-face-angry" style="color: #8ac71a"></i>
-  </a>
-  <a (click)="postRating(toiletId, 3)" class="ms-2"
-    ><i class="fa-regular fa-face-meh" style="color: #b9d33c"></i
-  ></a>
-  <a (click)="postRating(toiletId, 4)" class="ms-2"
-    ><i class="fa-regular fa-face-smile" style="color: #dbe63d"></i
-  ></a>
-  <a (click)="postRating(toiletId, 5)" class="ms-2"
-    ><i class="fa-regular fa-face-grin-wide" style="color: #f7ef02"></i
-  ></a>
-  <p>
-    Average Rating:<i class="fa-solid fa-star" style="color: #ffdd00"></i>
-    {{ this.displayedAverageRating }}
-  </p>
+<div class="star-container">
+  <div class="star-rating">
+    <a (click)="postRating(toiletId, 1)">
+      <i class="fa-regular fa-face-angry" style="color: #da1010"></i>
+    </a>
+    <a (click)="postRating(toiletId, 2)" class="ms-2">
+      <i class="fa-regular fa-face-angry" style="color: #fab005"></i>
+    </a>
+    <a (click)="postRating(toiletId, 3)" class="ms-2"
+      ><i class="fa-regular fa-face-meh" style="color: #dbe63d"></i
+    ></a>
+    <a (click)="postRating(toiletId, 4)" class="ms-2"
+      ><i class="fa-regular fa-face-smile" style="color: #b9d33c"></i></a
+    ><!-- #b9d33c -->
+    <a (click)="postRating(toiletId, 5)" class="ms-2"
+      ><i class="fa-regular fa-face-grin-wide" style="color: #50b806"></i
+    ></a>
+    <p>
+      Average Rating:<i class="fa-solid fa-star" style="color: #ffdd00"></i>
+      {{ this.displayedAverageRating }}
+    </p>
+  </div>
 </div>
