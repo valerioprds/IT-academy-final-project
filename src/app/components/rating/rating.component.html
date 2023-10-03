@@ -1,30 +1,45 @@
 <div class="star-container">
-  <div class="star-rating">
-    <a (click)="postRating(toiletId, 1)">
-      <i class="fa-regular fa-face-angry" style="color: #da1010"></i>
-    </a>
-    <a (click)="postRating(toiletId, 2)" class="ms-2">
-      <i class="fa-regular fa-face-angry" style="color: #fab005"></i>
-    </a>
-    <a (click)="postRating(toiletId, 3)" class="ms-2"
-      ><i class="fa-regular fa-face-meh" style="color: #dbe63d"></i
-    ></a>
-    <a (click)="postRating(toiletId, 4)" class="ms-2"
-      ><i class="fa-regular fa-face-smile" style="color: #b9d33c"></i></a
-    ><!-- #b9d33c -->
-    <a (click)="postRating(toiletId, 5)" class="ms-2"
-      ><i class="fa-regular fa-face-grin-wide" style="color: #50b806"></i
-    ></a>
-    <p>
-      Average Rating:
-      <i
-        class="fa-solid fa-star"
-        [ngStyle]="{
-          color: displayedAverageRatings[toiletId] < 3.5 ? 'red' : '#ffdd00'
-        }"
-      >
-      </i>
-      {{ displayedAverageRatings[toiletId] }}
-    </p>
+  <div class="star-rating-container">
+    <!-- button 1 -->
+    <div class="press-down">
+      <a (click)="postRating(toiletId, 1)">
+        <i class="fa-regular fa-face-angry" style="color: #da1010"></i>
+      </a>
+    </div>
+    <!-- button 2 -->
+    <div class="press-down ms-2">
+      <a (click)="postRating(toiletId, 2)">
+        <i class="fa-regular fa-face-angry" style="color: #fab005"></i>
+      </a>
+    </div>
+    <!-- button 3 -->
+    <div class="press-down ms-2">
+      <a (click)="postRating(toiletId, 3)">
+        <i class="fa-regular fa-face-angry" style="color: #dbe63d"></i>
+      </a>
+    </div>
+    <!-- button 4 -->
+    <div class="press-down ms-2">
+      <a (click)="postRating(toiletId, 4)">
+        <i class="fa-regular fa-face-angry" style="color: #b9d33c"></i>
+      </a>
+    </div>
+    <!-- button 5 -->
+    <div class="press-down ms-2">
+      <a (click)="postRating(toiletId, 5)">
+        <i class="fa-regular fa-face-angry" style="color: #50b806"></i>
+      </a>
+    </div>
   </div>
+  <p class="text-center mt-2">
+    Average Rating:
+    <i
+      class="fa-solid fa-star"
+      [ngStyle]="{
+        color: displayedAverageRatings[toiletId] < 3.5 ? 'red' : '#ffdd00'
+      }"
+    >
+    </i>
+    {{ displayedAverageRatings[toiletId] }}
+  </p>
 </div>
