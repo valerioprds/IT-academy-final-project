@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class RatingComponent implements OnInit {
   @Input() toiletId: string;
 
-  displayedAverageRating: number;
+  displayedAverageRatings: { [toiletId: string]: number } = {};
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
@@ -36,7 +36,8 @@ export class RatingComponent implements OnInit {
         (res: any) => {
           this.toastr.success('Rating posted successfully');
           console.log('Average Rating from backend:', res.averageRating); // Log the average rating from backend
-          this.displayedAverageRating = res.averageRating;
+          this.displayedAverageRatings[toiletId] = res.averageRating;
+
         },
         (err) => {
           this.toastr.error('Failed to post rating:', err);
