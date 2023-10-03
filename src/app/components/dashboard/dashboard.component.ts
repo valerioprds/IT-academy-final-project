@@ -105,6 +105,9 @@ export class DashboardComponent implements OnInit {
     );
     this.map.addControl(new mapboxgl.FullscreenControl());
 
+    /* START OF DIRECTIONS BIT */
+
+    // Initializing the MapboxDirections control
     this.directions = new MapboxDirections({
       accessToken: mapboxgl.accessToken,
       unit: 'metric',
@@ -132,6 +135,7 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+  /* END OF DIRECTIONS BIT */
 
   async getToilets() {
     return await this.mapService.getToilets(); // return the toilets
