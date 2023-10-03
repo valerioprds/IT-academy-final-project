@@ -14,34 +14,24 @@ export class RatingComponent implements OnInit {
 
   displayedAverageRatings: { [toiletId: string]: number } = {};
 
-  constructor(private http: HttpClient, private toastr: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private mapService: MapService
+  ) {}
 
   ngOnInit(): void {}
 
   postRating(toiletId: string, userRating: number) {
-    const payload = {
-      toiletId,
-      userRating,
-    };
-
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-    });
-
-    this.http
-      .post('http://localhost:5000/api/v1/toilets/rateToilet', payload, {
-        headers,
-      })
-      .subscribe(
-        (res: any) => {
-          this.toastr.success('Rating posted successfully');
-          console.log('Average Rating from backend:', res.averageRating); // Log the average rating from backend
-          this.displayedAverageRatings[toiletId] = res.averageRating;
-
-        },
-        (err) => {
-          this.toastr.error('Failed to post rating:', err);
-        }
-      );
+    this.mapService.postRating(toiletId, userRating).subscribe(
+      (res: any) => {
+        this.toastr.success('Rating posted successfully');
+        console.log('Average Rating from backend:', res.averageRating);
+        this.displayedAverageRatings[toiletId] = res.averageRating;
+      },
+      (err) => {
+        this.toastr.error('Failed to post rating:', err);
+      }
+    );
   }
 }

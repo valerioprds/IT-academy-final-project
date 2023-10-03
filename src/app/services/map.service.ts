@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import mapboxgl from 'mapbox-gl';
 
 @Injectable({
@@ -43,5 +43,24 @@ export class MapService {
           rating: toilet.ratings, //calculo para guardar media
         },
       }));
+  }
+
+  postRating(toiletId: string, userRating: number) {
+    const payload = {
+      toiletId,
+      userRating,
+    };
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.post(
+      'http://localhost:5000/api/v1/toilets/rateToilet',
+      payload,
+      {
+        headers,
+      }
+    );
   }
 }
