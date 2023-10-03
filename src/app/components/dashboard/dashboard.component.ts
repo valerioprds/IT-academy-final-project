@@ -115,8 +115,24 @@ export class DashboardComponent implements OnInit {
     });
     this.map.addControl(this.directions, 'top-left');
 
-    this.map.on('click', (e) => {
+    this.map.on('dblclick', (e) => {
       this.showAddLocationDialog(e.lngLat);
+    });
+
+    let touchStartTime;
+
+    this.map.on('touchstart', (e) => {
+      touchStartTime = new Date().getTime(); // Record the time when touch starts
+    });
+
+    this.map.on('touchend', (e) => {
+      const touchEndTime = new Date().getTime();
+      const touchDuration = touchEndTime - touchStartTime;
+
+      if (touchDuration >= 500) {
+        // Check if touch lasted for at least 1 second
+        this.showAddLocationDialog(e.lngLat);
+      }
     });
 
     this.map.on('load', async () => {
@@ -193,8 +209,7 @@ export class DashboardComponent implements OnInit {
             `
           <p class="popup" style="font-size: 16px; color: black">
             <strong>${this.currentToiletId}</strong><br>
-            <button id="rate-button">Calificar</button>
-          </p>
+            <button type="button" id="rate-button" class="btn btn-primary">Primary</button></p>
           `
           )
           .addTo(this.map);
@@ -264,22 +279,6 @@ export class DashboardComponent implements OnInit {
 
     return nearestToilet;
   }
-
-  /*   openDialogWithRating() {
-    const dialogRef = this.dialogRef.open(AddLocationComponent, {
-      width: '500px',
-      height: '400px',
-      data: { isRating: true }, // Send data to know it's for rating
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result === 'added') {
-        this.initializeMap();
-        this.getToilets();
-      }
-      // Add logic to handle when rating is updated if needed
-    });
-  } */
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
