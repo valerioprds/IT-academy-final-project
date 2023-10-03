@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import mapboxgl from 'mapbox-gl';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +11,8 @@ export class MapService {
   private readonly accessToken =
     'pk.eyJ1IjoidmFsZXJpb3ByZHMiLCJhIjoiY2xsaTM4MjFnMWlqMzNrcWh0d3J5aDNrZSJ9.p24UkToBjTKbmbq0MYedBQ';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient ,  private toastr: ToastrService,
+    private router: Router) {
     (mapboxgl as any).accessToken = this.accessToken;
   }
 
@@ -63,4 +66,42 @@ export class MapService {
       }
     );
   }
+
+
+  async addToilet(toiletIdValue: string, data: any) {
+    const header = new HttpHeaders({ contentType: 'application/json' });
+
+    try {
+      const response = await this.http
+        .post(
+          'http://localhost:5000/api/v1/toilets',
+          {
+            toiletId: toiletIdValue,
+            location: {
+              type: 'Point',
+              coordinates: [data.lngLat.lng, data.lngLat.lat],
+            },
+          },
+          {
+            headers: header,
+          }
+        )
+        .toPromise();
+
+      if (response) {
+        this.toastr.success(
+          `has been added successfully`,
+          `${toiletIdValue}`
+        );
+        this.router.navigate(['/dashboard']);
+      }
+    } catch (error: any) {
+      if (error.status === 400) {
+        this.toastr.error(`already exists`, `${toiletIdValue}`);
+      } else {
+        throw error;
+      }
+    }
+  }
+
 }
