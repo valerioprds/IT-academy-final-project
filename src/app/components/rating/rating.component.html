@@ -16,7 +16,14 @@
       ><i class="fa-regular fa-face-grin-wide" style="color: #50b806"></i
     ></a>
     <p>
-      Average Rating:<i class="fa-solid fa-star" style="color: #ffdd00"></i>
+      Average Rating:
+      <i
+        class="fa-solid fa-star"
+        [ngStyle]="{
+          color: displayedAverageRatings[toiletId] < 3.5 ? 'red' : '#ffdd00'
+        }"
+      >
+      </i>
       {{ displayedAverageRatings[toiletId] }}
     </p>
   </div>

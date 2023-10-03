@@ -139,8 +139,8 @@ export class DashboardComponent implements OnInit {
 
   showAddLocationDialog(lngLat: mapboxgl.LngLat) {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
-      width: '500px',
-      height: '400px',
+      width: '400px',
+      height: '200px',
       data: { lngLat: lngLat }, // Pass the clicked coordinates to the dialog
     });
 
