@@ -257,8 +257,4 @@ mat-divider {
   width: 23rem;
 }
 
-@media (max-width: 800px) {
-  .mapboxgl-ctrl-directions {
-    display: none !important;
-  }
-}
+
