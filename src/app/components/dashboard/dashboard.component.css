@@ -251,9 +251,13 @@ mat-divider {
   }
 }
 
-
-
 .modal-content {
   background-color: #a5ecf2;
   width: 23rem;
+}
+
+@media (max-width: 800px) {
+  .mapboxgl-ctrl-directions {
+    display: none !important;
+  }
 }
