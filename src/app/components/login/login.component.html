@@ -1,7 +1,10 @@
 <div class="wrapper">
   <div *ngIf="!loading" class="body">
     <img class="logo" src="/assets/img/WC1.png" alt="login" />
-    <h1>Login</h1>
+    <h3>
+      "Find relief on the go! Discover, add, and rate toilets near you with PeeMap!"
+    </h3>
+    <h1 >Login</h1>
     <form (ngSubmit)="login()" [formGroup]="loginForm">
       <div class="form-floating mb-3">
         <input
