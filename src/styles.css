@@ -46,3 +46,19 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@media (max-width: 500px) {
+  .mapbox-ctrl-top-left {
+    display: none;
+  }
+
+  .mapbox-directions-instructions {
+    display: none;
+  }
+
+  .mapbox-directions-component-keyline{
+    display: none;
+  }
+}
+
