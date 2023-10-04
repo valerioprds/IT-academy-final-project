@@ -9,7 +9,7 @@ body {
 .font-title {
   font-family: "Black Ops One", cursive;
   font-size: 38px;
-  color: #000000;
+  color: #f0f0f0;
 }
 
 .map-container {
@@ -105,7 +105,7 @@ body {
 }
 
 .menu-icon {
-  color: #000;
+  color: #f0f0f0;
 }
 
 .mat-sidenav {
@@ -146,11 +146,11 @@ body {
 }
 
 mat-icon {
-  color: white;
+  color: #f0f0f0;
 }
 
 mat-sidenav span {
-  color: white;
+  color: #f0f0f0;
 }
 
 .menu-button {
@@ -167,14 +167,15 @@ mat-sidenav span {
 
 .avatar {
   margin-top: 16px;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
+  width: 160px;
+  height: 160px;
+  /*  border-radius: 50%; */
 }
 
 .name {
   margin-top: 8px;
-  font-weight: normal;
+  font-family: "Black Ops One", cursive;
+  font-size: 28px;
 }
 
 .designation {
