@@ -11,8 +11,11 @@ export class MapService {
   private readonly accessToken =
     'pk.eyJ1IjoidmFsZXJpb3ByZHMiLCJhIjoiY2xsaTM4MjFnMWlqMzNrcWh0d3J5aDNrZSJ9.p24UkToBjTKbmbq0MYedBQ';
 
-  constructor(private http: HttpClient ,  private toastr: ToastrService,
-    private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private toastr: ToastrService,
+    private router: Router
+  ) {
     (mapboxgl as any).accessToken = this.accessToken;
   }
 
@@ -20,32 +23,23 @@ export class MapService {
     return 'mapbox://styles/mapbox/streets-v11';
   }
 
-  async getToilets() {
-    const res: any = await this.http
-      .get('http://localhost:5000/api/v1/toilets')
-      .toPromise();
-    return res.data
-      .filter(
-        (toilet: any) =>
-          toilet?.location?.coordinates != null &&
-          toilet.location.coordinates.length == 2
-      )
-      .map((toilet: any) => ({
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [
-            toilet.location.coordinates[0],
-            toilet.location.coordinates[1],
-          ],
-        },
-        properties: {
-          toiletId: toilet.toiletId,
-          icon: 'toilet',
-          location: toilet.location.formattedAddress,
-          rating: toilet.ratings, //calculo para guardar media
-        },
-      }));
+   getToilets(toilets: []) {
+    return toilets.map((toilet: any) => ({
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [
+          toilet.location.coordinates[0],
+          toilet.location.coordinates[1],
+        ],
+      },
+      properties: {
+        toiletId: toilet.toiletId,
+        icon: 'toilet',
+        location: toilet.location.formattedAddress,
+        rating: toilet.ratings, //calculo para guardar media
+      },
+    }));
   }
 
   postRating(toiletId: string, userRating: number) {
@@ -66,7 +60,6 @@ export class MapService {
       }
     );
   }
-
 
   async addToilet(toiletIdValue: string, data: any) {
     const header = new HttpHeaders({ contentType: 'application/json' });
@@ -89,10 +82,7 @@ export class MapService {
         .toPromise();
 
       if (response) {
-        this.toastr.success(
-          `has been added successfully`,
-          `${toiletIdValue}`
-        );
+        this.toastr.success(`has been added successfully`, `${toiletIdValue}`);
         this.router.navigate(['/dashboard']);
       }
     } catch (error: any) {
@@ -104,4 +94,7 @@ export class MapService {
     }
   }
 
+  // src/app/services/map.service.ts
+
+  //http://localhost:5000/api/v1/toilets
 }

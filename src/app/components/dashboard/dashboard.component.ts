@@ -11,6 +11,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { ToiletServiceService } from 'src/app/services/toilet-service.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -32,7 +33,9 @@ export class DashboardComponent implements OnInit {
 
   isButtonVisible = true;
 
-  currentToiletId: any;
+  toilets: [] = [];
+
+  currentToilet: any = { averageRating: 0 };
   @ViewChild(MatSidenav)
   sidenav!: MatSidenav;
 
@@ -43,7 +46,8 @@ export class DashboardComponent implements OnInit {
     private dialogRef: MatDialog,
     private observer: BreakpointObserver,
     private cdRef: ChangeDetectorRef,
-    private http: HttpClient
+    private http: HttpClient,
+    private toiletService: ToiletServiceService
   ) {}
 
   getUserVerification() {
@@ -136,7 +140,8 @@ export class DashboardComponent implements OnInit {
     });
 
     this.map.on('load', async () => {
-      const toilets = await this.getToilets();
+      await this.loadToilets();
+      const toilets = this.getToilets();
       console.log('from initializeMap ', toilets);
 
       this.loadMapData(toilets);
@@ -153,8 +158,8 @@ export class DashboardComponent implements OnInit {
   }
   /* END OF DIRECTIONS BIT */
 
-  async getToilets() {
-    return await this.mapService.getToilets(); // return the toilets
+  getToilets() {
+    return this.mapService.getToilets(this.toilets); // return the toilets
   }
 
   showAddLocationDialog(lngLat: mapboxgl.LngLat) {
@@ -167,9 +172,24 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'added') {
         this.initializeMap();
-        this.getToilets();
+        this.loadToilets();
       }
     });
+  }
+
+  async loadToilets() {
+    this.toilets = await this.toiletService.getToilets();
+    if (this.currentToilet != null && this.currentToilet['toiletId'] != null) {
+      this.currentToilet = this.toiletService.getToiletsFromId(
+        this.toilets,
+        this.currentToilet['toiletId']
+      );
+      this.currentToilet = {
+        ... this.currentToilet,
+        averageRating: this.toiletService.getAverage(this.currentToilet)
+      }
+      console.log('postLoad', this.currentToilet)
+    }
   }
 
   loadMapData(toilets: any = []) {
@@ -201,14 +221,21 @@ export class DashboardComponent implements OnInit {
       if (e.features && e.features.length) {
         console.log(e.features);
         const feature = e.features[0];
-        this.currentToiletId = feature.properties['toiletId']; // Assign the toiletId value to the variable
-
+        this.currentToilet = this.toiletService.getToiletsFromId(
+          this.toilets,
+          feature.properties['toiletId']
+        ); // Assign the toiletId value to the variable
+        this.currentToilet = {
+          ...this.currentToilet,
+          averageRating: this.toiletService.getAverage(this.currentToilet),
+        };
+        console.log('currentToilet', this.currentToilet);
         const popup = new mapboxgl.Popup({ offset: 25 })
           .setLngLat(e.lngLat)
           .setHTML(
             `
           <p class="popup" style="font-size: 16px; color: black">
-            <strong>${this.currentToiletId}</strong><br>
+            <strong>${this.currentToilet['toiletId']}   ${this.currentToilet['averageRating']} </strong><br>
             <button type="button" id="rate-button" class="btn btn-primary">Primary</button></p>
           `
           )
@@ -246,8 +273,8 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  async navigateToNearestToilet() {
-    const toilets = await this.getToilets();
+  navigateToNearestToilet() {
+    const toilets = this.getToilets();
     const nearestToilet = this.findNearestToilet(toilets);
     if (nearestToilet) {
       const destination = new mapboxgl.LngLat(
@@ -289,7 +316,7 @@ export class DashboardComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result === 'added') {
         this.initializeMap();
-        this.getToilets();
+        this.loadToilets();
       }
     });
   }

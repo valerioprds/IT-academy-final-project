@@ -2,44 +2,38 @@
   <div class="star-rating-container">
     <!-- button 1 -->
     <div class="press-down">
-      <a (click)="postRating(toiletId, 1)">
+      <a (click)="postRating(toilet['toiletId'], 1)">
         <i class="fa-regular fa-face-angry" style="color: #da1010"></i>
       </a>
     </div>
     <!-- button 2 -->
     <div class="press-down ms-2">
-      <a (click)="postRating(toiletId, 2)">
+      <a (click)="postRating(toilet['toiletId'], 2)">
         <i class="fa-regular fa-face-angry" style="color: #fab005"></i>
       </a>
     </div>
     <!-- button 3 -->
     <div class="press-down ms-2">
-      <a (click)="postRating(toiletId, 3)">
+      <a (click)="postRating(toilet['toiletId'], 3)">
         <i class="fa-regular fa-face-meh" style="color: #dbe63d"></i>
       </a>
     </div>
     <!-- button 4 -->
     <div class="press-down ms-2">
-      <a (click)="postRating(toiletId, 4)">
+      <a (click)="postRating(toilet['toiletId'], 4)">
         <i class="fa-regular fa-face-smile" style="color: #b9d33c"></i>
       </a>
     </div>
     <!-- button 5 -->
     <div class="press-down ms-2">
-      <a (click)="postRating(toiletId, 5)">
+      <a (click)="postRating(toilet['toiletId'], 5)">
         <i class="fa-regular fa-face-grin-wide" style="color: #50b806"></i>
       </a>
     </div>
   </div>
   <p class="text-center mt-2">
     Average Rating:
-    <i
-      class="fa-solid fa-star"
-      [ngStyle]="{
-        color: displayedAverageRatings[toiletId] < 3.5 ? 'red' : '#ffdd00'
-      }"
-    >
-    </i>
-    {{ displayedAverageRatings[toiletId] }}
+    <i class="fa-solid fa-star"> </i>
+    {{ toilet["averageRating"] }}
   </p>
 </div>
