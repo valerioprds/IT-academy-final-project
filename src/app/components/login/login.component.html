@@ -1,11 +1,20 @@
-<div class="wrapper" >
-  <div *ngIf="!loading" class="body" >
-    <img class="logo" src="/assets/img/1-recortada.png" alt="login" />
-   
-    <h3>
-      "Find relief on the go! Discover, add, and rate toilets near you with PeeMap!"
-    </h3>
-    <h1 >Login</h1>
+<div
+  class="wrapper d-flex justify-content-center align-items-center"
+  style="height: 100vh"
+>
+  <div *ngIf="!loading" class="body p-4" style="max-width: 400px; width: 100%">
+    <div class="text-center mb-4">
+      <img
+        class="logo img-fluid"
+        src="/assets/img/1-recortada.png"
+        alt="login"
+      />
+      <h3>
+        "Find relief on the go! Discover, add, and rate toilets near you with
+        PeeMap!"
+      </h3>
+      <h1>Login</h1>
+    </div>
     <form (ngSubmit)="login()" [formGroup]="loginForm">
       <div class="form-floating mb-3">
         <input
@@ -15,33 +24,33 @@
           formControlName="email"
         />
         <label>Email</label>
-        <span
-          *ngIf="
-            loginForm.get('email')?.hasError('required') &&
-            loginForm.get('email')?.touched
-          "
-          class="text-danger error-label"
-        >
-          Email is <strong>required</strong></span
-        ><span
-          *ngIf="
-            loginForm.get('email')?.hasError('email') &&
-            loginForm.get('email')?.touched
-          "
-          class="text-danger error-label"
-        >
-          Email is <strong>invalid</strong></span
-        >
+        <div *ngIf="loginForm.get('email')?.touched">
+          <span
+            *ngIf="loginForm.get('email')?.hasError('required')"
+            class="text-danger error-label"
+          >
+            Email is <strong>required</strong>
+          </span>
+          <span
+            *ngIf="loginForm.get('email')?.hasError('email')"
+            class="text-danger error-label"
+          >
+            Email is <strong>invalid</strong>
+          </span>
+        </div>
       </div>
-      <div class="form-floating mb-3">
+      <div class="form-floating mb-3 position-relative">
         <input
           [type]="changetype ? 'password' : 'text'"
           class="form-control"
           placeholder="Password"
           formControlName="password"
         />
-        <span class="eyeicon" (click)="viewpass()"
-          ><i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
+        <span
+          class="eyeicon position-absolute top-50 end-0 translate-middle-y"
+          (click)="viewpass()"
+        >
+          <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>
         </span>
         <label>Password</label>
         <span
@@ -51,10 +60,9 @@
           "
           class="text-danger error-label"
         >
-          Password is <strong>required</strong></span
-        >
+          Password is <strong>required</strong>
+        </span>
       </div>
-
       <div class="d-grid gap-2">
         <button
           type="submit"
@@ -64,12 +72,14 @@
           Login
         </button>
       </div>
-      <p class="mt-3">
-        no account yet?<a class="ms-2" routerLink="/user-registration"
-          >Register</a
-        >
-      </p>
-      <a class="mt-3" routerLink="/recover-password">Forgot your password?</a>
+      <div class="mt-3 text-center">
+        <p>
+          no account yet?<a class="ms-2" routerLink="/user-registration"
+            >Register</a
+          >
+        </p>
+        <a routerLink="/recover-password">Forgot your password?</a>
+      </div>
     </form>
   </div>
   <app-spinner *ngIf="loading"></app-spinner>
