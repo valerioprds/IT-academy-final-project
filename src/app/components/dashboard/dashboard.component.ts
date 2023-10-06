@@ -235,8 +235,9 @@ export class DashboardComponent implements OnInit {
           .setHTML(
             `
           <p class="popup" style="font-size: 16px; color: black">
-            <strong>${this.currentToilet['toiletId']}   ${this.currentToilet['averageRating']} </strong><br>
-            <button type="button" id="rate-button" class="btn btn-primary">Primary</button></p>
+            <strong>${this.currentToilet['toiletId']}   </strong><br>
+            Average cleanliness: ${this.currentToilet['averageRating']}<br></p>
+            <button type="button" id="rate-button" class="btn btn-primary">Primary</button>
           `
           )
           .addTo(this.map);
