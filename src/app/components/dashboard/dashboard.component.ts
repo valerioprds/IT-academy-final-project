@@ -326,8 +326,8 @@ export class DashboardComponent implements OnInit {
 
   showInfoDialog() {
     const dialogRef = this.dialogRef.open(InfoComponent, {
-      width: '400px',
-      height: '200px',
+      width: '900px',
+      height: '500px',
     })}
 
   LogOut() {
