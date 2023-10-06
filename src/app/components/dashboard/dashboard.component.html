@@ -20,7 +20,7 @@
 <mat-sidenav-container>
   <mat-sidenav #sidenav="matSidenav">
     <!--  mode side means that with big screen it will always display on the side -->
-    <img src="/assets/img/WC0b.png" class="avatar" />
+    <img src="/assets/img/1-recortada.png" class="avatar" />
     <h4 class="name">PeeMap</h4>
     <p class="designation">add small description here</p>
     <!-- buttons  -->
@@ -37,7 +37,7 @@
       <mat-icon>wc</mat-icon>
       <span>Emergency Toilet</span>
     </button>
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="showInfoDialog()">
       <mat-icon>info</mat-icon>
       <span>About</span>
     </button>
@@ -79,6 +79,14 @@
 </mat-sidenav-container>
 
 <div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <app-rating [toilet]="currentToilet"></app-rating>
+  </div>
+</div>
+
+
+<div id="infoModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
     <app-rating [toilet]="currentToilet"></app-rating>

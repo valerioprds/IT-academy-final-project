@@ -27,6 +27,7 @@ import { environment } from 'environments/environment';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RatingComponent } from './components/rating/rating.component';
+import { InfoComponent } from './components/info/info.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -40,6 +41,7 @@ import { RatingComponent } from './components/rating/rating.component';
     SpinnerComponent,
     AddLocationComponent,
     RatingComponent,
+    InfoComponent,
 
   ],
   imports: [

@@ -12,6 +12,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToiletServiceService } from 'src/app/services/toilet-service.service';
+import { InfoComponent } from '../info/info.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -321,6 +322,13 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+
+  showInfoDialog() {
+    const dialogRef = this.dialogRef.open(InfoComponent, {
+      width: '400px',
+      height: '200px',
+    })}
 
   LogOut() {
     this.afAuth.signOut().then(() => {
