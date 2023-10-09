@@ -42,6 +42,11 @@
       <span>User Guide</span>
     </button>
 
+    <button mat-button class="menu-button" (click)="shouwAboutUsDialog()">
+      <mat-icon>About</mat-icon>
+      <span>About Us</span>
+    </button>
+
     <mat-divider></mat-divider>
 
     <button mat-button class="menu-button" routerLink="/help">
@@ -88,6 +93,5 @@
 <div id="infoModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <app-rating [toilet]="currentToilet"></app-rating>
   </div>
 </div>

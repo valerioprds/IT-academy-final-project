@@ -13,6 +13,7 @@ import { FormControl } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ToiletServiceService } from 'src/app/services/toilet-service.service';
 import { InfoComponent } from '../info/info.component';
+import { AboutUsComponent } from '../about-us/about-us.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -329,6 +330,13 @@ export class DashboardComponent implements OnInit {
       width: '900px',
       height: '500px',
     })}
+
+
+    shouwAboutUsDialog() {
+      const dialogRef = this.dialogRef.open(AboutUsComponent, {
+        width: '900px',
+        height: '500px',
+      })}
 
   LogOut() {
     this.afAuth.signOut().then(() => {

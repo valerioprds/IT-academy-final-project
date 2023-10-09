@@ -28,6 +28,7 @@ import { AddLocationComponent } from './components/add-location/add-location.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { RatingComponent } from './components/rating/rating.component';
 import { InfoComponent } from './components/info/info.component';
+import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -42,6 +43,7 @@ import { InfoComponent } from './components/info/info.component';
     AddLocationComponent,
     RatingComponent,
     InfoComponent,
+    AboutUsComponent,
 
   ],
   imports: [
