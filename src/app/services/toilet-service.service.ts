@@ -9,7 +9,7 @@ export class ToiletServiceService {
 
   async getToilets() {
     const res: any = await this.http
-      .get('http://localhost:5000/api/v1/toilets')
+      .get('https://toilet-locator.cyclic.app/api/v1/toilets')
       .toPromise();
     return res.data.filter(
       (toilet: any) =>
@@ -35,3 +35,7 @@ export class ToiletServiceService {
     });
   }
 }
+
+
+
+//http://localhost:5000/api/v1/toilets

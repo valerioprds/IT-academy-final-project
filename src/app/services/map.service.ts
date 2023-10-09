@@ -53,7 +53,7 @@ export class MapService {
     });
 
     return this.http.post(
-      'http://localhost:5000/api/v1/toilets/rateToilet',
+      'https://toilet-locator.cyclic.app/api/v1/toilets/rateToilet',
       payload,
       {
         headers,
@@ -67,7 +67,7 @@ export class MapService {
     try {
       const response = await this.http
         .post(
-          'http://localhost:5000/api/v1/toilets',
+          'https://toilet-locator.cyclic.app/api/v1/toilets',
           {
             toiletId: toiletIdValue,
             location: {
