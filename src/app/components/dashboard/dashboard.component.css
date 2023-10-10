@@ -239,6 +239,18 @@ mat-divider {
   font-size: 2rem;
 }
 
+/*  this is to set height of sidebar in mobile phones */
+.mat-drawer {
+  height: auto;
+}
+
+
+
+
+.modal-content {
+  background-color: #a5ecf2;
+  width: 23rem;
+}
 
 
 @media only screen and (min-width: 320px) {
@@ -254,9 +266,9 @@ mat-divider {
   }
 }
 
-.modal-content {
-  background-color: #a5ecf2;
-  width: 23rem;
+@media only screen and (max-width: 800px) {
+  .mat-drawer {
+    height: 87%;
+  }
+
 }
-
-
