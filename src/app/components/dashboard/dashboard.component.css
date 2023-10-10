@@ -170,7 +170,6 @@ mat-sidenav span {
   transform: scale(1);
 }
 
-
 .menu-button:active {
   transform: scale(0.95);
   background-color: rgb(50, 189, 244);
@@ -204,7 +203,7 @@ mat-divider {
 /* beginning of styles for modal of the rating*/
 @import "~mapbox-gl/dist/mapbox-gl.css";
 
- .modal {
+.modal {
   display: none;
   position: fixed;
   top: 0;
@@ -215,7 +214,7 @@ mat-divider {
   background-color: #a1a1a161;
 }
 
- .modal-content {
+.modal-content {
   background-color: #c4e90d;
   margin: 15% auto;
   padding: 20px;
@@ -241,8 +240,8 @@ mat-divider {
 
 .emergency-toilet {
   position: absolute;
-  top: 29rem;
-  right: 66rem;
+  top: 33rem;
+  right: 2rem;
   z-index: 500;
   border-radius: 50px;
 }
@@ -255,35 +254,18 @@ mat-divider {
   height: auto;
 }
 
-
-
-
 .modal-content {
   background-color: #a5ecf2;
   width: 23rem;
 }
 
 
-@media only screen and (min-width: 320px) {
-  .emergency-toilet {
-    position: absolute;
-    top: 29rem;
-    right: 66rem;
-    z-index: 500;
-    border-radius: 50px;
-  }
-  .fa-solid {
-    font-size: 2rem;
-  }
-}
 
 @media only screen and (max-width: 800px) {
   .mat-drawer {
     height: 87%;
   }
-
 }
-
 
 @media only screen and (max-width: 800px) {
   .content {
@@ -297,10 +279,7 @@ mat-divider {
 
     border-radius: 10px;
   }
-
 }
-
-
 
 /* .content {
   height: calc(100vh - 98px);
