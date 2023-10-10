@@ -312,8 +312,8 @@ this.map.addControl(new mapboxgl.NavigationControl());
 
   openDialog() {
     const dialogRef = this.dialogRef.open(AddLocationComponent, {
-      width: '500px',
-      height: '400px',
+      width: '400px',
+      height: 'auto',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
