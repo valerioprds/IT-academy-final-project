@@ -99,7 +99,7 @@ export class DashboardComponent implements OnInit {
       center: [this.lng, this.lat],
     });
 
-this.map.addControl(new mapboxgl.NavigationControl());
+    this.map.addControl(new mapboxgl.NavigationControl());
     this.map.addControl(
       new mapboxgl.GeolocateControl({
         positionOptions: {
@@ -187,10 +187,10 @@ this.map.addControl(new mapboxgl.NavigationControl());
         this.currentToilet['toiletId']
       );
       this.currentToilet = {
-        ... this.currentToilet,
-        averageRating: this.toiletService.getAverage(this.currentToilet)
-      }
-      console.log('postLoad', this.currentToilet)
+        ...this.currentToilet,
+        averageRating: this.toiletService.getAverage(this.currentToilet),
+      };
+      console.log('postLoad', this.currentToilet);
     }
   }
 
@@ -236,11 +236,14 @@ this.map.addControl(new mapboxgl.NavigationControl());
           .setLngLat(e.lngLat)
           .setHTML(
             `
-          <p class="popup" style="font-size: 16px; color: black">
-            <strong>${this.currentToilet['toiletId']}   </strong><br>
-            Average cleanliness: ${this.currentToilet['averageRating']}<br></p>
-            <button type="button" id="rate-button" class="btn btn-primary">Primary</button>
-          `
+            <div class="popup-content">
+                <p class="mb-2 text-center" style="font-size: 16px; color: black">
+                    <strong>${this.currentToilet['toiletId']}</strong>
+                </p>
+                <p style="font-size: 16px; color: black" class="mb-3 text-center">Average cleanliness: <strong>${this.currentToilet['averageRating']}</strong></p>
+                <button type="button" id="rate-button" class="btn btn-link  mx-3 btn-sm" >Score the cleanliness</button>
+            </div>
+            `
           )
           .addTo(this.map);
         // console.log('from pop up   ' + currentToiletId);
@@ -324,19 +327,19 @@ this.map.addControl(new mapboxgl.NavigationControl());
     });
   }
 
-
   showInfoDialog() {
     const dialogRef = this.dialogRef.open(InfoComponent, {
       width: '900px',
       height: '500px',
-    })}
+    });
+  }
 
-
-    shouwAboutUsDialog() {
-      const dialogRef = this.dialogRef.open(AboutUsComponent, {
-        width: '900px',
-        height: 'auto',
-      })}
+  shouwAboutUsDialog() {
+    const dialogRef = this.dialogRef.open(AboutUsComponent, {
+      width: '900px',
+      height: 'auto',
+    });
+  }
 
   LogOut() {
     this.afAuth.signOut().then(() => {
