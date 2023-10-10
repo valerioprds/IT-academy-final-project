@@ -1,5 +1,6 @@
 <div
   class="wrapper d-flex justify-content-center align-items-center"
+  style="height: auto"
 >
   <div *ngIf="!loading" class="body p-4" style="max-width: 400px; width: 100%">
     <div class="text-center mb-4">
@@ -47,7 +48,7 @@
           formControlName="password"
         />
         <span
-          class="eyeicon position-absolute   translate-middle-y"
+          class="eyeicon position-absolute translate-middle-y"
           (click)="viewpass()"
         >
           <i [ngClass]="visible ? 'fa fa-eye' : 'fa fa-eye-slash'"></i>

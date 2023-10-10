@@ -24,8 +24,6 @@ h1 {
   font-size: 24px;
 }
 
-
-
 .tracking-in-expand-forward-top {
   animation: tracking-in-expand-forward-top 0.4s linear both;
 }
@@ -43,6 +41,3 @@ h1 {
     opacity: 1;
   }
 }
-
-
-
