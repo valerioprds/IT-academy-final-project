@@ -26,7 +26,7 @@ export class AddLocationComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.data);
+    //console.log(this.data);
     this.toiletForm = this.fb.group({
       toiletId: ['', [Validators.required, Validators.minLength(6)]],
       //tengo que añadir input y parle longitud y latitud
@@ -36,7 +36,7 @@ export class AddLocationComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log('hello from onsubmit');
+    //console.log('hello from onsubmit');
     const toiletIdValue = this.toiletForm.get('toiletId')!.value;
 
     if (this.toiletForm.valid) {

@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit {
     this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
-        console.log(user);
+        //console.log(user);
       } else {
         this.router.navigate(['/login']);
       }
@@ -144,7 +144,7 @@ export class DashboardComponent implements OnInit {
     this.map.on('load', async () => {
       await this.loadToilets();
       const toilets = this.getToilets();
-      console.log('from initializeMap ', toilets);
+      //console.log('from initializeMap ', toilets);
 
       this.loadMapData(toilets);
 
@@ -190,7 +190,7 @@ export class DashboardComponent implements OnInit {
         ...this.currentToilet,
         averageRating: this.toiletService.getAverage(this.currentToilet),
       };
-      console.log('postLoad', this.currentToilet);
+      //console.log('postLoad', this.currentToilet);
     }
   }
 
@@ -221,7 +221,7 @@ export class DashboardComponent implements OnInit {
     this.map.on('click', 'points', (e) => {
       //console.log('hello from on click popup');
       if (e.features && e.features.length) {
-        console.log(e.features);
+        //console.log(e.features);
         const feature = e.features[0];
         this.currentToilet = this.toiletService.getToiletsFromId(
           this.toilets,
@@ -231,7 +231,7 @@ export class DashboardComponent implements OnInit {
           ...this.currentToilet,
           averageRating: this.toiletService.getAverage(this.currentToilet),
         };
-        console.log('currentToilet', this.currentToilet);
+        //console.log('currentToilet', this.currentToilet);
         const popup = new mapboxgl.Popup({ offset: 25 })
           .setLngLat(e.lngLat)
           .setHTML(
@@ -252,7 +252,7 @@ export class DashboardComponent implements OnInit {
         document
           .getElementById('rate-button')
           .addEventListener('click', function () {
-            console.log('opening my modal for rating');
+            //console.log('opening my modal for rating');
             //  console.log('Current Toilet ID:', this.currentToiletId);
 
             const modal = document.getElementById('myModal');

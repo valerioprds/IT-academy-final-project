@@ -52,7 +52,7 @@ export class UserRegistrationComponent implements OnInit {
     const password = this.registerForm.value.password;
     const repeatPassword = this.registerForm.value.repeatPassword;
 
-    console.log(this.registerForm);
+    //console.log(this.registerForm);
 
     if (password !== repeatPassword) {
       this.toastr.error('the password does not match', 'Error');

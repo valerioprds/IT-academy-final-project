@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
     this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((user) => {
-        console.log(user);
+       // console.log(user);
         if (user.user?.emailVerified) {
           this.router.navigate(['/dashboard']);
         } else {
@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       })
       .catch((error) => {
         this.loading = false;
-        console.log(error);
+       // console.log(error);
         this.toastr.error(this.firebaseError.codeError(error.code), 'Error');
       });
   }

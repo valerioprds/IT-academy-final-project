@@ -34,11 +34,11 @@ export class RatingComponent implements OnChanges {
   }
 
   ngOnInit(): void {
-    console.log(this.toilet);
+    //console.log(this.toilet);
   }
 
   postRating(toiletId: string, userRating: number) {
-    console.log('from postRating ', toiletId);
+    //console.log('from postRating ', toiletId);
     this.mapService.postRating(toiletId, userRating).subscribe(
       (res: any) => {
         this.toastr.success('Rating posted successfully');
