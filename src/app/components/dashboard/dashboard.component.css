@@ -211,18 +211,14 @@ mat-divider {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: #91919180;
+  background-color: #a1a1a161;
 }
-/* modal content of rating */
+
 .modal-content {
-<<<<<<< HEAD
   background-color: #a5ecf2;
-=======
-  background-color: #c3e1e7;
->>>>>>> e739f02bdda2ec18dad2bf800d1c0c217bad6b04
   margin: 15% auto;
   padding: 20px;
-  border: 1px solid #696868;
+  border: 1px solid #888;
   width: 50%;
 }
 
@@ -258,10 +254,10 @@ mat-divider {
   height: auto;
 }
 
-/* .modal-content {
+.modal-content {
   background-color: #a5ecf2;
   width: 23rem;
-} */
+}
 
 
 
