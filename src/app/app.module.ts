@@ -27,7 +27,7 @@ import { environment } from 'environments/environment';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { RatingComponent } from './components/rating/rating.component';
-import { InfoComponent } from './components/info/info.component';
+import { InfoComponent } from './components/user-guide/info.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
 
 @NgModule({

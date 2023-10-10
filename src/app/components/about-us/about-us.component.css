@@ -1,9 +1,14 @@
 .about-us {
   background-color: #b1d0d581;
+  height:  100%;
   font-family: "Roboto", sans-serif;
-  height:  auto;
 }
 
+
+
+.about-us p:last-child {
+  margin-bottom: 0;
+}
 h1,
 h2 {
   font-family: "Black Ops One", cursive;

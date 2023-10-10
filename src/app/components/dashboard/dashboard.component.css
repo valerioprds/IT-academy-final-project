@@ -215,6 +215,8 @@ mat-divider {
 }
 
 .modal-content {
+  font-family: "Roboto", sans-serif;
+  font-size: 20px;
   background-color: #a5ecf2;
   margin: 15% auto;
   padding: 20px;
@@ -254,13 +256,6 @@ mat-divider {
   height: auto;
 }
 
-.modal-content {
-  background-color: #a5ecf2;
-  width: 23rem;
-}
-
-
-
 @media only screen and (max-width: 800px) {
   .mat-drawer {
     height: 87%;
@@ -281,11 +276,11 @@ mat-divider {
   }
 }
 
-
-
 @media only screen and (max-width: 800px) {
   .modal-content {
     top: 200px;
+    font-family: "Roboto", sans-serif;
+
     background-color: #a5ecf2;
     margin: 15% auto;
     padding: 20px;
