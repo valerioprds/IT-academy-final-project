@@ -54,27 +54,11 @@
     >
       <i class="rating-face fa-regular fa-face-meh" style="color: #dbe63d"></i>
     </ng-container>
-<<<<<<< HEAD
     <ng-container *ngIf="toilet['averageRating'] >= 4 && toilet['averageRating'] < 5">
         <i class=" rating-face fa-regular fa-face-smile" style="color: #b9d33c"></i>
     </ng-container>
     <ng-container *ngIf="toilet['averageRating'] >= 5">
         <i class=" rating-face fa-regular fa-face-grin-wide" style="color: #50b806"></i>
-=======
-    <ng-container
-      *ngIf="toilet['averageRating'] >= 4 && toilet['averageRating'] <= 5"
-    >
-      <i
-        class="rating-face fa-regular fa-face-smile"
-        style="color: #b9d33c"
-      ></i>
-    </ng-container>
-    <ng-container *ngIf="toilet['averageRating'] > 5">
-      <i
-        class="rating-face fa-regular fa-face-grin-wide"
-        style="color: #50b806"
-      ></i>
->>>>>>> e739f02bdda2ec18dad2bf800d1c0c217bad6b04
     </ng-container>
     {{ toilet["averageRating"] }}
   </p>
