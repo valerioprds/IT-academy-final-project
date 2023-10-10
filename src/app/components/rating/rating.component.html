@@ -42,10 +42,10 @@
     <ng-container *ngIf="toilet['averageRating'] >= 3 && toilet['averageRating'] < 4">
         <i class=" rating-face fa-regular fa-face-meh" style="color: #dbe63d"></i>
     </ng-container>
-    <ng-container *ngIf="toilet['averageRating'] >= 4 && toilet['averageRating'] <= 5">
+    <ng-container *ngIf="toilet['averageRating'] >= 4 && toilet['averageRating'] < 5">
         <i class=" rating-face fa-regular fa-face-smile" style="color: #b9d33c"></i>
     </ng-container>
-    <ng-container *ngIf="toilet['averageRating'] > 5">
+    <ng-container *ngIf="toilet['averageRating'] >= 5">
         <i class=" rating-face fa-regular fa-face-grin-wide" style="color: #50b806"></i>
     </ng-container>
     {{ toilet["averageRating"] }}
