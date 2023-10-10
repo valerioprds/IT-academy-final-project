@@ -335,7 +335,7 @@ this.map.addControl(new mapboxgl.NavigationControl());
     shouwAboutUsDialog() {
       const dialogRef = this.dialogRef.open(AboutUsComponent, {
         width: '900px',
-        height: '500px',
+        height: 'auto',
       })}
 
   LogOut() {
