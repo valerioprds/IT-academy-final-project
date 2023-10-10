@@ -11,14 +11,35 @@
     #1c92d2
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
-h1 {font-family: 'Black Ops One', cursive;}
+h1 {
+  font-family: "Black Ops One", cursive;
+}
 
 /* h3 {font-family: 'Black Ops One', cursive;} */
-
 
 .eyeicon {
   top: 28px;
   right: 15px;
   cursor: pointer;
   font-size: 24px;
+}
+
+
+
+.tracking-in-expand-forward-top {
+  animation: tracking-in-expand-forward-top 0.4s linear both;
+}
+@keyframes tracking-in-expand-forward-top {
+  0% {
+    letter-spacing: -0.2em;
+    transform: translateZ(-700px) translateY(-100px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
 }
