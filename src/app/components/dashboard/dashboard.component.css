@@ -132,6 +132,7 @@ body {
   height: calc(100vh - 65px);
 }
 
+/* this is where the map is  */
 .content {
   height: calc(100vh - 98px);
   margin: 16px;
@@ -139,7 +140,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
+  font-size: 20rem;
   color: lightgray;
 
   border-radius: 10px;
@@ -151,6 +152,7 @@ mat-icon {
 
 mat-sidenav span {
   color: #f0f0f0;
+  font-size: 20px;
 }
 
 .menu-button {
@@ -161,8 +163,17 @@ mat-sidenav span {
   font-size: 1rem;
 
   mat-icon {
-    margin-right: 8px;
+    margin-right: 48px;
   }
+
+  transition: transform 0.1s ease-in-out;
+  transform: scale(1);
+}
+
+
+.menu-button:active {
+  transform: scale(0.95);
+  background-color: rgb(50, 189, 244);
 }
 
 .avatar {
