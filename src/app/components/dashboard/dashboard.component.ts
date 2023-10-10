@@ -52,7 +52,7 @@ export class DashboardComponent implements OnInit {
     private toiletService: ToiletServiceService
   ) {}
 
-  getUserVerification() {
+  verifyCurrentUserEmailStatus() {
     this.afAuth.currentUser.then((user) => {
       if (user && user.emailVerified) {
         this.dataUser = user;
@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initializeMap();
 
-    // this.getUserVerification();
+    this.verifyCurrentUserEmailStatus();
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
