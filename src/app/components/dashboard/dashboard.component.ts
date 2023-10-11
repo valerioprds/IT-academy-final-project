@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initializeMap();
 
-    //this.verifyCurrentUserEmailStatus();
+    this.verifyCurrentUserEmailStatus();
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
