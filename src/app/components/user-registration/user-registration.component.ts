@@ -24,15 +24,12 @@ export class UserRegistrationComponent implements OnInit {
     private afAuth: AngularFireAuth,
     private toastr: ToastrService,
     private router: Router,
-    private firebaseError: FirebaseCodeErrorService,
-
+    private firebaseError: FirebaseCodeErrorService
   ) {
     this.registerForm = this.fb.group({
-
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       repeatPassword: ['', Validators.required],
-
     });
   }
   ngOnInit(): void {}

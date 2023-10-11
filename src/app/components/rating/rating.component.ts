@@ -24,7 +24,7 @@ export class RatingComponent implements OnChanges {
     private http: HttpClient,
     private toastr: ToastrService,
     private mapService: MapService,
-    private dashboard : DashboardComponent
+    private dashboard: DashboardComponent
   ) {}
 
   ngOnChanges(changes: SimpleChanges) {
@@ -42,8 +42,7 @@ export class RatingComponent implements OnChanges {
     this.mapService.postRating(toiletId, userRating).subscribe(
       (res: any) => {
         this.toastr.success('Rating posted successfully');
-        this.dashboard.loadToilets()
-
+        this.dashboard.loadToilets();
       },
       (err) => {
         this.toastr.error('Failed to post rating:', err);
