@@ -1,6 +1,6 @@
-# Public Toilet Finder 🚽
+# PeeMap 🚽
 
-Welcome to the Public Toilet Finder! This app helps users locate nearby public toilets, navigate to them, and rate their cleanliness.
+Welcome to the PeeMap! This app helps users locate nearby public toilets, navigate to them, and rate their cleanliness.
 
 ## Table of Contents
 
@@ -12,7 +12,7 @@ Welcome to the Public Toilet Finder! This app helps users locate nearby public t
 
 ## Overview
 
-In today's bustling urban life, finding a nearby public toilet can be quite a challenge. Public Toilet Finder aims to solve this problem by allowing users to view the locations of nearby toilets, get directions to them, and provide ratings based on cleanliness. Whether you're on a long road trip, attending an outdoor event, or simply exploring a new city, this app ensures you'll never be caught off-guard.
+In today's bustling urban life, finding a nearby public toilet can be quite a challenge. PeeMap aims to solve this problem by allowing users to view the locations of nearby toilets, get directions to them, and provide ratings based on cleanliness. Whether you're on a long road trip, attending an outdoor event, or simply exploring a new city, this app ensures you'll never be caught off-guard.
 
 ## Features
 
@@ -42,7 +42,7 @@ In today's bustling urban life, finding a nearby public toilet can be quite a ch
 
 ## Conclusion
 
-Public Toilet Finder is not just an app; it's a community-driven platform that promotes public hygiene and convenience. We're proud to offer this service to the public and hope to expand our reach in the future. If you're a recruiter, we invite you to take a deeper look into our code and consider the passion, effort, and technical expertise that went into building this application. We're always open to feedback, contributions, and, of course, job opportunities. 😉
+PeeMap is not just an app; it's a community-driven platform that promotes public hygiene and convenience. We're proud to offer this service to the public and hope to expand our reach in the future. If you're a recruiter, we invite you to take a deeper look into our code and consider the passion, effort, and technical expertise that went into building this application. We're always open to feedback, contributions, and, of course, job opportunities. 😉
 
 ---
 
