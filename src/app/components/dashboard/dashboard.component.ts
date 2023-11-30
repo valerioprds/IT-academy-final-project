@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.initializeMap();
 
-    this.verifyCurrentUserEmailStatus();
+    //this.verifyCurrentUserEmailStatus();
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -237,7 +237,7 @@ export class DashboardComponent implements OnInit {
           .setHTML(
             `
             <div class="popup-content">
-                <p class="mb-2 text-center" style="font-size: 16px; color: black">
+                <p class="mb-2 text-center color-title" style="font-size: 16px; color: black">
                     <strong>${this.currentToilet['toiletId']}</strong>
                 </p>
                 <p style="font-size: 16px; color: black" class="mb-3 text-center">Average cleanliness: <strong>${this.currentToilet['averageRating']}</strong></p>

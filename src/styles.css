@@ -38,6 +38,19 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.mapboxgl-popup-content {
+  border-top: 10px solid transparent;
+  border-image: linear-gradient(to right, #2193b0, #6dd5ed) 1;
+  /* background: blue; */
+  max-width: 200px;
+  border-radius: 10px;
+
+}
+
+.color-title {
+  color: black !important;
+}
+
 @media (max-width: 500px) {
   .mapbox-ctrl-top-left {
     display: none;
