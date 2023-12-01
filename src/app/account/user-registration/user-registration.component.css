@@ -15,6 +15,16 @@ h1 {font-family: 'Black Ops One', cursive;}
 
 /* h3 {font-family: 'Black Ops One', cursive;} */
 
+.btn-primary:hover {
+  animation: liftUp 0.3s forwards;
+  background: linear-gradient(to right, #0062E6, #33AEFF);
+  border: none;
+}
+
+@keyframes liftUp {
+  from { box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
+  to { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
+}
 
 .eyeicon {
   top: 28px;

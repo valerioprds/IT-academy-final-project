@@ -56,10 +56,6 @@ h1 {
   to { box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3); }
 }
 
-.btn-primary:hover {
-  background: linear-gradient(to right, #0062E6, #33AEFF);
-  border: none;
-}
 
 
 

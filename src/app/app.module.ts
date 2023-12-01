@@ -21,7 +21,7 @@ import { LoginComponent } from './account/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserRegistrationComponent } from './account/user-registration/user-registration.component';
 import { EmailVerificationComponent } from './account/email-verification/email-verification.component';
-import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { RecoverPasswordComponent } from './account/recover-password/recover-password.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'environments/environment';
 import { AddLocationComponent } from './components/add-location/add-location.component';

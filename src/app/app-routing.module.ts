@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './account/login/login.component';
 import { UserRegistrationComponent } from './account/user-registration/user-registration.component';
 import { EmailVerificationComponent } from './account/email-verification/email-verification.component';
-import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
+import { RecoverPasswordComponent } from './account/recover-password/recover-password.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { AddLocationComponent } from './components/add-location/add-location.component';
 
