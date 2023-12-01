@@ -45,10 +45,15 @@ body {
   height: 150px;
   width: 200px;
   border-radius: 10px;
+   animation: swashIn 0.5s ease-out forwards;
+ 
+}
+/* swashIn effect of popup  */
+
+.swashIn{
   animation: swashIn 0.5s ease-out forwards;
 
 }
-/* swashIn effect of popup  */
 
 @keyframes swashIn {
   0% {
