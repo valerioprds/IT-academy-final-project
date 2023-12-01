@@ -304,10 +304,15 @@ mat-divider {
     top: 200px;
     font-family: "Roboto", sans-serif;
 
-    background-color: #a5ecf2;
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
     width: 350px;
+  }
+
+  .modal-content {
+    background: #2193b0; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to top, #cfe8ee, #71a2ae);
+    background: linear-gradient(to top, #cfe8ee, #2193b0);
   }
 }
