@@ -17,10 +17,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 //components
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './account/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserRegistrationComponent } from './components/user-registration/user-registration.component';
-import { EmailVerificationComponent } from './components/email-verification/email-verification.component';
+import { UserRegistrationComponent } from './account/user-registration/user-registration.component';
+import { EmailVerificationComponent } from './account/email-verification/email-verification.component';
 import { RecoverPasswordComponent } from './components/recover-password/recover-password.component';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { environment } from 'environments/environment';
