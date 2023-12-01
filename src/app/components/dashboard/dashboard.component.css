@@ -202,8 +202,6 @@ mat-divider {
   background-color: rgba(255, 255, 255, 0.5);
 }
 
-
-
 /* beginning of styles for modal of the rating*/
 @import "~mapbox-gl/dist/mapbox-gl.css";
 
@@ -220,11 +218,15 @@ mat-divider {
 .modal-content {
   font-family: "Roboto", sans-serif;
   font-size: 20px;
-  background-color: #a5ecf2;
   margin: 15% auto;
   padding: 20px;
   border: 1px solid #888;
   width: 35%;
+}
+.modal-content {
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #cfe8ee, #71a2ae);
+  background: linear-gradient(to left, #cfe8ee, #2193b0);
 }
 
 .close {

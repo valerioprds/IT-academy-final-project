@@ -8,9 +8,22 @@
   justify-content: center;
   align-items: center;
   /* height: 100vh; */
+
 }
 
+/* background: #2193b0; /* fallback for old browsers */
+ /* background: -webkit-linear-gradient(
+    to left,
+    #6dd5ed,
+    #2193b0
+  );
+  background: linear-gradient(
+    to left,
+    #6dd5ed,
+    #2193b0
+  );
 
+} */
 
 
 .press-down {
