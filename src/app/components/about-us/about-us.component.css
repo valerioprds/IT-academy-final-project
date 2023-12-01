@@ -1,9 +1,14 @@
 .about-us {
-  background-color: #b1d0d581;
   height:  100%;
   font-family: "Roboto", sans-serif;
+  font-size: 16px;
 }
 
+.about-us {
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #cfe8ee, #71a2ae);
+  background: linear-gradient(to top, #cfe8ee, #2193b0);
+}
 
 
 .about-us p:last-child {
