@@ -1,12 +1,18 @@
 .container {
-  background-color: #b1d0d581;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
 }
 
-h1, h2 {
-  font-family: 'Black Ops One', cursive;
+.container {
+  background: #2193b0; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #cfe8ee, #71a2ae);
+  background: linear-gradient(to top, #cfe8ee, #2193b0);
 }
 
+h1,
+h2 {
+  font-family: "Black Ops One", cursive;
+}
 
 .container p:last-child {
   margin-bottom: 0;
