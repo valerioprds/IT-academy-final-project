@@ -225,8 +225,8 @@ mat-divider {
 }
 .modal-content {
   background: #2193b0; /* fallback for old browsers */
-  background: -webkit-linear-gradient(to left, #cfe8ee, #71a2ae);
-  background: linear-gradient(to left, #cfe8ee, #2193b0);
+  background: -webkit-linear-gradient(to top, #cfe8ee, #71a2ae);
+  background: linear-gradient(to top, #cfe8ee, #2193b0);
 }
 
 .close {
