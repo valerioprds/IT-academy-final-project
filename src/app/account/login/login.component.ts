@@ -17,59 +17,15 @@ import {
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   animations: [
-    trigger('slideIn', [
-      transition(':enter', [
-        style({ transform: 'translateX(-100%)', opacity: 0 }),
-        animate(
-          '1s ease-out',
-          style({ transform: 'translateX(0)', opacity: 1 })
-        ),
-      ]),
-    ]),
-    trigger('focusPanel', [
-      state(
-        'inactive',
-        style({
-          transform: 'scale(1)',
-        })
-      ),
-      state(
-        'active',
-        style({
-          transform: 'scale(1.05)',
-        })
-      ),
-      transition('inactive => active', animate('500ms ease-in')),
-      transition('active => inactive', animate('500ms ease-out')),
-    ]),
-    trigger('flipIcon', [
-      state(
-        'default',
-        style({
-          transform: 'rotate(0)',
-        })
-      ),
-      state(
-        'flipped',
-        style({
-          transform: 'rotate(180deg)',
-        })
-      ),
-      transition('default <=> flipped', animate('300ms')),
-    ]),
-  ],
+    trigger('fade', [
+      state('void', style({ opacity: 0 })),
+      transition(':enter', [animate('500ms ease-in')]),
+      transition(':leave', [animate('500ms ease-out')]),
+    ])
+  ]
+
 })
 export class LoginComponent implements OnInit {
-  // animations
-  focusState: string = 'inactive';
-  iconState: string = 'default';
-
-  toggleFocusState() {
-    this.focusState = this.focusState === 'inactive' ? 'active' : 'inactive';
-  }
-  toggleIconState() {
-    this.iconState = this.iconState === 'default' ? 'flipped' : 'default';
-  }
 
   loginForm: FormGroup;
   loading: boolean = false;
