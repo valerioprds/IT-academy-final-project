@@ -38,15 +38,31 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+/* popup */
+
 .mapboxgl-popup-content {
-  border-top: 10px solid transparent;
-  border-image: linear-gradient(to right, #2193b0, #6dd5ed) 1;
-  /* background: blue; */
-  max-width: 200px;
+  border-top: 10px solid #5ac4de;
+  height: 150px;
+  width: 200px;
   border-radius: 10px;
+  animation: swashIn 0.5s ease-out forwards;
 
 }
+/* swashIn effect of popup  */
 
+@keyframes swashIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 .color-title {
   color: black !important;
 }
